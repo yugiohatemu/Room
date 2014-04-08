@@ -23,7 +23,12 @@ MainRoom::~MainRoom(){
 }
 
 void MainRoom::render(){
+    //Event unrelated update
     if (next_pos != pos) {
+        //TODO: against obstacle to update speed vector
+        
+        
+        
         float dis =  (next_pos - pos).get_norm();
         if (dis > speed.get_norm()) {
             pos = pos + speed;
@@ -50,13 +55,15 @@ void MainRoom::render(){
 void MainRoom::update(SDL_Event event){
   
     if( event.type == SDL_MOUSEBUTTONDOWN ){
-
+        
         int x, y;
         SDL_GetMouseState( &x, &y );
         
         Point new_pos(x,y,0);
-        
         if (new_pos != next_pos) {
+            //TODO: test if it is in intersection
+            //If so, we get the closest intersectin point?
+            
             //recalculate the vector
             next_pos = new_pos;
             speed = next_pos - pos;

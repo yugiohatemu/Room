@@ -19,6 +19,7 @@ struct Vector{
     Vector(const Vector& vec);
     float dot(Vector vec);
     Vector cross(Vector vec);
+    float cross2D(Vector vec);
     
     Vector operator*(float t);
     Vector operator+(const Vector &vec);

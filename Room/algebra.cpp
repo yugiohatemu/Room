@@ -75,6 +75,9 @@ Vector Vector::cross(Vector vec){
     return Vector(y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x);
 }
 
+float Vector::cross2D(Vector vec){
+    return x * vec.y - y * vec.x;
+}
 
 /////////////////////////////////////////////
 Point::Point() {
