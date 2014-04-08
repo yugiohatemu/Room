@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string>
 #include "mainRoom.h"
-
+#include "timer.h"
 //Minimum Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -74,18 +74,20 @@ int main( int argc, char* args[] ){
 		while( !quit ){
 			
 			while ( SDL_PollEvent( &event )!= 0){
-				//User requests quit
+				//Don't break until we get the event we want...
+                
 				if( event.type == SDL_QUIT ){
 					quit = true;
-				}
+                    break;
+				}else if(event.type == SDL_MOUSEBUTTONDOWN){
+                    main_room.update(event);
+                    break;
+                }
 			}
             
-            //update
             glClear(GL_COLOR_BUFFER_BIT);
             main_room.render();
-            main_room.update(event);
             SDL_GL_SwapWindow( gWindow );
-            
 		}
 		
 		//Disable text input

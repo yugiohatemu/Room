@@ -23,7 +23,17 @@ MainRoom::~MainRoom(){
 }
 
 void MainRoom::render(){
-
+    if (next_pos != pos) {
+        float dis =  (next_pos - pos).get_norm();
+        if (dis > speed.get_norm()) {
+            pos = pos + speed;
+        }else{ //if we are close enough
+            pos = next_pos;
+            speed.x = 0;
+            speed.y = 0;
+        }
+    }
+    
     glPushMatrix();
     
     glColor3f(1, 0, 0);
@@ -38,9 +48,9 @@ void MainRoom::render(){
 }
 
 void MainRoom::update(SDL_Event event){
-    
+  
     if( event.type == SDL_MOUSEBUTTONDOWN ){
-        //Get mouse position
+
         int x, y;
         SDL_GetMouseState( &x, &y );
         
@@ -55,15 +65,5 @@ void MainRoom::update(SDL_Event event){
         }
     }
 
-    if (next_pos != pos) {
-        float dis =  (next_pos - pos).get_norm();
-        if (dis > speed.get_norm()) {
-//            speed = next_pos - pos;
-            pos = pos + speed;
-        }else{ //if we are close enough
-//            pos = next_pos;
-            speed.x = 0;
-            speed.y = 0;
-        }
-    }
+    
 }
