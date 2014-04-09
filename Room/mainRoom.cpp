@@ -17,14 +17,11 @@ MainRoom::MainRoom(){
     pos.z = 0;
     next_pos = pos;
     speed_factor = 5;
-    
-    obstacle[0] = Rect(Point(50,50,0), 100, 100);
-//    obstacle[1] = Rect(Point(300,100,0), 100, 100);
-//    obstacle[2] = Rect(Point(500,150,0), 100, 100);
+    obstacle = new Item();
 }
 
 MainRoom::~MainRoom(){
-    
+    delete obstacle;
 }
 
 void MainRoom::render(){
@@ -40,7 +37,7 @@ void MainRoom::render(){
         }
     }
     
-    for (unsigned int i = 0; i < 1; i++) obstacle[i].render();
+    obstacle->render();
     
     glPushMatrix();
     
@@ -61,27 +58,48 @@ void MainRoom::update(SDL_Event event){
         
         int x, y; SDL_GetMouseState( &x, &y );
         Point new_pos(x,y,0);
-        if (next_pos != new_pos) {
-            //recalculate the vector
-            Vector dir = new_pos - pos;
+        if (next_pos == new_pos) return;
 
-            float dis = dir.get_norm();
-            //Get the closeset one as the real next_pos;
-            for (unsigned int i = 0; i < 1; i++) {
-                Vector next_dir = obstacle[i].get_closest_dir(pos, dir);
-                float next_dis = next_dir.get_norm();
-               
-                std::cout<<next_dir<<std::endl;
-                if (next_dis < dis) {
-                    dis = next_dis;
-                    dir = next_dir;
-                }
+        Vector dir = new_pos - pos;
+        float dis = dir.get_norm();
+        
+        //Get the closeset one as the real next_pos;
+        for (unsigned int i = 0; i < 1; i++) {
+            Vector next_dir = obstacle->get_closest_dir(pos, dir);
+            float next_dis = next_dir.get_norm();
+                    
+            if (next_dis < dis) {
+                dis = next_dis;
+                dir = next_dir;
             }
-            
-            next_pos = pos + dir;
-            dir.normalize();
-            speed = dir * speed_factor;
+        
         }
+        
+        for (unsigned int i = 0; i < 1; i++) {
+            if (obstacle->is_item_being_hit(new_pos)) {
+                
+                if (obstacle->is_option_visible) {
+                    
+                    int option_hit = obstacle->get_option_being_hit(new_pos);
+                    if (option_hit != -1) { //hit actually happens on option
+                        std::cout<<"Hit option "<<option_hit<<std::endl;
+                    }
+                    break;
+                }else { //close enough
+                    obstacle->is_option_visible = true;
+                    break;
+                    
+                }
+            }else{
+                obstacle->is_option_visible = false;
+            }
+
+        }
+        
+        next_pos = pos + dir;
+        dir.normalize();
+        speed = dir * speed_factor;
+        
     }
     
 }

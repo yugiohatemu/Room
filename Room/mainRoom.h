@@ -12,12 +12,13 @@
 #include "algebra.h"
 #include <SDL2/SDL_events.h>
 #include "rect.h"
+#include "item.h"
 
 class MainRoom{
     Point pos;
     Point next_pos;
     Vector speed;
-    Rect obstacle[1];
+    Item *obstacle;
     float speed_factor;
 public:
     MainRoom();

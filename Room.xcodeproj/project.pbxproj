@@ -17,6 +17,7 @@
 		3B63181018F47343004A6369 /* mainRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63180E18F47343004A6369 /* mainRoom.cpp */; };
 		3B63181318F483DD004A6369 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181118F483DD004A6369 /* timer.cpp */; };
 		3B63181618F49DDE004A6369 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181418F49DDE004A6369 /* rect.cpp */; };
+		3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB88FFC18F5BCE900127E17 /* item.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,8 @@
 		3B63181218F483DD004A6369 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		3B63181418F49DDE004A6369 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 		3B63181518F49DDE004A6369 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
+		3BB88FFC18F5BCE900127E17 /* item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = item.cpp; sourceTree = "<group>"; };
+		3BB88FFD18F5BCE900127E17 /* item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = item.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				3B6317FA18F45C62004A6369 /* main.cpp */,
 				3B63180E18F47343004A6369 /* mainRoom.cpp */,
 				3B63180F18F47343004A6369 /* mainRoom.h */,
+				3BB88FFC18F5BCE900127E17 /* item.cpp */,
+				3BB88FFD18F5BCE900127E17 /* item.h */,
 				3B63180B18F470B0004A6369 /* algebra.cpp */,
 				3B63180C18F470B0004A6369 /* algebra.h */,
 				3B63181418F49DDE004A6369 /* rect.cpp */,
@@ -155,6 +160,7 @@
 			files = (
 				3B63180D18F470B0004A6369 /* algebra.cpp in Sources */,
 				3B63181018F47343004A6369 /* mainRoom.cpp in Sources */,
+				3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */,
 				3B6317FB18F45C62004A6369 /* main.cpp in Sources */,
 				3B63181618F49DDE004A6369 /* rect.cpp in Sources */,
 				3B63181318F483DD004A6369 /* timer.cpp in Sources */,

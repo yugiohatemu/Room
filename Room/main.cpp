@@ -20,7 +20,7 @@ const int SCREEN_HEIGHT = 480;
 
 int main( int argc, char* args[] ){
     SDL_Window* gWindow = NULL;
-    SDL_GLContext gContext = nullptr;
+    SDL_GLContext gContext;
     
     bool init_sucess = true;
 	//Initialize SDL
@@ -67,7 +67,7 @@ int main( int argc, char* args[] ){
 		bool quit = false;
 //				SDL_StartTextInput();
         
-        MainRoom main_room;
+        MainRoom * main_room = new MainRoom();
         //Handle events on queue
         SDL_Event event;
 		//While application is running
@@ -80,22 +80,23 @@ int main( int argc, char* args[] ){
 					quit = true;
                     break;
 				}else if(event.type == SDL_MOUSEBUTTONDOWN){
-                    main_room.update(event);
+                    main_room->update(event);
                     break;
                 }
 			}
             
             glClear(GL_COLOR_BUFFER_BIT);
-            main_room.render();
+            main_room->render();
             SDL_GL_SwapWindow( gWindow );
 		}
+        delete main_room;
 		
 		//Disable text input
 //		SDL_StopTextInput();
 	}
     
 	//Close and free
-    SDL_GL_DeleteContext(gContext);
+//    SDL_GL_DeleteContext(gContext);
     SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
     

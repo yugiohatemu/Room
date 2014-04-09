@@ -26,18 +26,15 @@ Rect::Rect(Point left_top, int width, int height){
 }
 
 void Rect::render(){
-    glPushMatrix();
-    glColor3f(0, 1, 1);
     glBegin(GL_QUADS);
     for (unsigned int i = 0; i < 4; i++) glVertex2f(points[i].x, points[i].y);
     glEnd();
-    glPopMatrix();
 }
 
-bool Rect::is_xy_in_rec(int x, int y){
-    return (x >= points[0].x && x <= points[1].x && y >= points[0].y && y <= points[3].y);
+bool Rect::is_pos_in_rec(Point pos){
+    return (pos.x >= points[0].x && pos.x <= points[1].x && pos.y >= points[0].y && pos.y <= points[3].y);
 }
-
+/*
 Vector Rect::get_closest_dir(Point pos, Vector dir){
     //check against each interscetion
     int order[] = {0,1,2,3,0}; //lazy cheat for cycle
@@ -57,4 +54,4 @@ Vector Rect::get_closest_dir(Point pos, Vector dir){
     }
     
     return dir * t;
-}
+}*/
