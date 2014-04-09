@@ -10,12 +10,14 @@
 #define __Room__mainRoom__
 
 #include "algebra.h"
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
+#include "rect.h"
 
 class MainRoom{
     Point pos;
     Point next_pos;
     Vector speed;
+    Rect obstacle[1];
     float speed_factor;
 public:
     MainRoom();

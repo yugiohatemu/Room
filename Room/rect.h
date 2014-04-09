@@ -13,9 +13,11 @@
 
 struct Rect{
     Point points[4];
+    Rect();
     Rect(Point left_top, int width, int height);
     bool is_xy_in_rec(int x, int y);
-    Point get_closest_intersection(Point pos, Vector dir);
+    Vector get_closest_dir(Point pos, Vector dir);
+    void render();
 };
 
 #endif /* defined(__Room__rect__) */

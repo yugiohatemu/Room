@@ -14,8 +14,13 @@
 MainRoom::MainRoom(){
     pos.x = 240;
     pos.y = 320;
+    pos.z = 0;
     next_pos = pos;
     speed_factor = 5;
+    
+    obstacle[0] = Rect(Point(50,50,0), 100, 100);
+//    obstacle[1] = Rect(Point(300,100,0), 100, 100);
+//    obstacle[2] = Rect(Point(500,150,0), 100, 100);
 }
 
 MainRoom::~MainRoom(){
@@ -25,10 +30,6 @@ MainRoom::~MainRoom(){
 void MainRoom::render(){
     //Event unrelated update
     if (next_pos != pos) {
-        //TODO: against obstacle to update speed vector
-        
-        
-        
         float dis =  (next_pos - pos).get_norm();
         if (dis > speed.get_norm()) {
             pos = pos + speed;
@@ -39,10 +40,12 @@ void MainRoom::render(){
         }
     }
     
+    for (unsigned int i = 0; i < 1; i++) obstacle[i].render();
+    
     glPushMatrix();
     
     glColor3f(1, 0, 0);
-    glTranslatef(pos.x, pos.y, pos.z);
+    glTranslatef(pos.x, pos.y, 0);
     
     glBegin( GL_QUADS );
     glVertex2f( 0 , 0  ); glVertex2f( 0 , 50 );
@@ -56,21 +59,29 @@ void MainRoom::update(SDL_Event event){
   
     if( event.type == SDL_MOUSEBUTTONDOWN ){
         
-        int x, y;
-        SDL_GetMouseState( &x, &y );
-        
+        int x, y; SDL_GetMouseState( &x, &y );
         Point new_pos(x,y,0);
-        if (new_pos != next_pos) {
-            //TODO: test if it is in intersection
-            //If so, we get the closest intersectin point?
-            
+        if (next_pos != new_pos) {
             //recalculate the vector
-            next_pos = new_pos;
-            speed = next_pos - pos;
-            speed.normalize();
-            speed = speed * speed_factor;
+            Vector dir = new_pos - pos;
+
+            float dis = dir.get_norm();
+            //Get the closeset one as the real next_pos;
+            for (unsigned int i = 0; i < 1; i++) {
+                Vector next_dir = obstacle[i].get_closest_dir(pos, dir);
+                float next_dis = next_dir.get_norm();
+               
+                std::cout<<next_dir<<std::endl;
+                if (next_dis < dis) {
+                    dis = next_dis;
+                    dir = next_dir;
+                }
+            }
+            
+            next_pos = pos + dir;
+            dir.normalize();
+            speed = dir * speed_factor;
         }
     }
-
     
 }

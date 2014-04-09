@@ -7,6 +7,12 @@
 //
 
 #include "rect.h"
+#include <OpenGL/OpenGL.h>
+#include <SDL2/SDL_opengl.h>
+#include <iostream>
+Rect::Rect(){
+    
+}
 
 Rect::Rect(Point left_top, int width, int height){
     //in the order of
@@ -18,34 +24,37 @@ Rect::Rect(Point left_top, int width, int height){
     points[3] = left_top + Vector(0, height, 0);
     
 }
+
+void Rect::render(){
+    glPushMatrix();
+    glColor3f(0, 1, 1);
+    glBegin(GL_QUADS);
+    for (unsigned int i = 0; i < 4; i++) glVertex2f(points[i].x, points[i].y);
+    glEnd();
+    glPopMatrix();
+}
+
 bool Rect::is_xy_in_rec(int x, int y){
     return (x >= points[0].x && x <= points[1].x && y >= points[0].y && y <= points[3].y);
 }
 
-Point Rect::get_closest_intersection(Point pos, Vector dir){
+Vector Rect::get_closest_dir(Point pos, Vector dir){
     //check against each interscetion
-    int order[] = {0,1,2,3,0 }; //lazy cheat for cycle
-    
-    for (unsigned int i = 0; i < 4; i++) {
-        Vector edge_vec = points[order[i+1]]- points[order[i+1]];
-        if (!is_vector_parallel(edge_vec, dir)) {
-            
-            float t_up = (points[order[i+1]]- pos).cross(edge_vec);
-            float u_up = (points[order[i+1]]- pos).cross(dir);
-            
-            float div_down = ray.cross(edge_vec);
-            
-            float new_t = t_up / div_down;
-            float u =  u_up / div_down;
+    int order[] = {0,1,2,3,0}; //lazy cheat for cycle
+    float t = 1.0f;
+    for (unsigned int i = 0; i < 4; i++) { //x * vec.y - y * vec.x
+        Vector edge_vec = points[order[i+1]]- points[order[i]];
+        float div_down = dir.x * edge_vec.y - dir.y * edge_vec.x;
+        
+        if (div_down != 0) {
+            Vector ray = points[order[i]]- pos;
+            float next_t = (ray.x * edge_vec.y - ray.y * edge_vec.x) /div_down;
+            float next_u = (ray.x * dir.y - ray.y * dir.x) / div_down;
             
             //within line segment, and less than the previous one, replace it
-            if (new_t >= 0 &&  new_t < t && u >= 0 && u <= 1) {
-                t = new_t;
-            }
+            if (next_t > 0 &&  next_t < t && next_u >= 0 && next_u <= 1) t = next_t;
         }
     }
     
-    
-    
-    
+    return dir * t;
 }
