@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0C0C3A18F73B1900D13EE0 /* bottomInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C0C3018F73B1900D13EE0 /* bottomInfo.cpp */; };
+		3B0C0C3B18F73B1900D13EE0 /* instance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C0C3218F73B1900D13EE0 /* instance.cpp */; };
+		3B0C0C3C18F73B1900D13EE0 /* loadPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C0C3418F73B1900D13EE0 /* loadPNG.cpp */; };
+		3B0C0C3D18F73B1900D13EE0 /* text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C0C3618F73B1900D13EE0 /* text.cpp */; };
+		3B0C0C3E18F73B1900D13EE0 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C0C3818F73B1900D13EE0 /* texture.cpp */; };
 		3B6317FB18F45C62004A6369 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B6317FA18F45C62004A6369 /* main.cpp */; };
 		3B6317FD18F45C62004A6369 /* Room.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3B6317FC18F45C62004A6369 /* Room.1 */; };
 		3B63180418F45C92004A6369 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B63180318F45C92004A6369 /* Cocoa.framework */; };
@@ -34,6 +39,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3B0C0C3018F73B1900D13EE0 /* bottomInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bottomInfo.cpp; sourceTree = "<group>"; };
+		3B0C0C3118F73B1900D13EE0 /* bottomInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bottomInfo.h; sourceTree = "<group>"; };
+		3B0C0C3218F73B1900D13EE0 /* instance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = instance.cpp; sourceTree = "<group>"; };
+		3B0C0C3318F73B1900D13EE0 /* instance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = instance.h; sourceTree = "<group>"; };
+		3B0C0C3418F73B1900D13EE0 /* loadPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loadPNG.cpp; sourceTree = "<group>"; };
+		3B0C0C3518F73B1900D13EE0 /* loadPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loadPNG.h; sourceTree = "<group>"; };
+		3B0C0C3618F73B1900D13EE0 /* text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text.cpp; sourceTree = "<group>"; };
+		3B0C0C3718F73B1900D13EE0 /* text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = text.h; sourceTree = "<group>"; };
+		3B0C0C3818F73B1900D13EE0 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		3B0C0C3918F73B1900D13EE0 /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		3B6317F718F45C62004A6369 /* Room */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Room; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6317FA18F45C62004A6369 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3B6317FC18F45C62004A6369 /* Room.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Room.1; sourceTree = "<group>"; };
@@ -68,6 +83,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B0C0C3F18F73B2700D13EE0 /* Instance */ = {
+			isa = PBXGroup;
+			children = (
+				3B0C0C3018F73B1900D13EE0 /* bottomInfo.cpp */,
+				3B0C0C3118F73B1900D13EE0 /* bottomInfo.h */,
+				3B0C0C3218F73B1900D13EE0 /* instance.cpp */,
+				3B0C0C3318F73B1900D13EE0 /* instance.h */,
+				3B0C0C3418F73B1900D13EE0 /* loadPNG.cpp */,
+				3B0C0C3518F73B1900D13EE0 /* loadPNG.h */,
+				3B0C0C3818F73B1900D13EE0 /* texture.cpp */,
+				3B0C0C3918F73B1900D13EE0 /* texture.h */,
+			);
+			name = Instance;
+			sourceTree = "<group>";
+		};
 		3B6317EE18F45C62004A6369 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +121,9 @@
 		3B6317F918F45C62004A6369 /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				3B0C0C3F18F73B2700D13EE0 /* Instance */,
+				3B0C0C3618F73B1900D13EE0 /* text.cpp */,
+				3B0C0C3718F73B1900D13EE0 /* text.h */,
 				3B6317FA18F45C62004A6369 /* main.cpp */,
 				3B63180E18F47343004A6369 /* mainRoom.cpp */,
 				3B63180F18F47343004A6369 /* mainRoom.h */,
@@ -159,11 +192,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B63180D18F470B0004A6369 /* algebra.cpp in Sources */,
+				3B0C0C3C18F73B1900D13EE0 /* loadPNG.cpp in Sources */,
+				3B0C0C3A18F73B1900D13EE0 /* bottomInfo.cpp in Sources */,
+				3B0C0C3B18F73B1900D13EE0 /* instance.cpp in Sources */,
 				3B63181018F47343004A6369 /* mainRoom.cpp in Sources */,
 				3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */,
 				3B6317FB18F45C62004A6369 /* main.cpp in Sources */,
 				3B63181618F49DDE004A6369 /* rect.cpp in Sources */,
+				3B0C0C3D18F73B1900D13EE0 /* text.cpp in Sources */,
 				3B63181318F483DD004A6369 /* timer.cpp in Sources */,
+				3B0C0C3E18F73B1900D13EE0 /* texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
