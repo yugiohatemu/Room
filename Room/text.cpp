@@ -7,7 +7,7 @@
 //
 
 #include "text.h"
-#include "texture.h"
+#include "instance.h"
 #include <OpenGL/OpenGL.h>
 #include <SDL2/SDL_opengl.h>
 
@@ -23,7 +23,8 @@ void Text::render(){
     glPushMatrix();
     
     //get texture
-    GLuint texture_ID = Texture::Instance().get_texture(Texture::FONT);
+    GLuint texture_ID = Instance::get().texture().get_texture(Texture::FONT);
+
     glBindTexture(GL_TEXTURE_2D, texture_ID);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     

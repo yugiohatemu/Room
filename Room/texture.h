@@ -14,13 +14,6 @@
 #include <vector>
 
 class Texture{
-private:
-    Texture();  // Private so that it can  not be called
-    Texture(Texture const&);             // copy constructor is private
-    Texture& operator=(Texture const&);  // assignment operator is private
-    
-    unsigned int height;
-    unsigned int width;
     
 public:
     enum{
@@ -31,12 +24,8 @@ public:
     }TEXTURE_TYPE;
     
     std::vector<GLuint> textureList;
-    
-    static Texture& Instance();
     int load_file(const char * fileName,unsigned int width,unsigned int height);
     void clean_texture();
-    //    void use_texture();
     GLuint get_texture(GLuint type);
-    //static void unbind_texture();
 };
 #endif /* defined(__Room__texture__) */

@@ -13,24 +13,6 @@
 #include "loadPNG.h"
 #include <OpenGL/glu.h>
 
-Texture::Texture(){
-}
-
-Texture::Texture(Texture const&){
-    
-}
-// copy constructor is private
-Texture& Texture::operator=(Texture const&){
-    return *this;
-}
-
-Texture& Texture::Instance(){
-    static Texture m_Instance;
-    return m_Instance;
-}
-
-////////////////////////////////////////////////////////////////////////
-
 
 int Texture::load_file(const char * fileName,unsigned int width, unsigned int height){
     
