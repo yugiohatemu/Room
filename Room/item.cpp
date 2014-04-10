@@ -11,11 +11,11 @@
 #include <SDL2/SDL_opengl.h>
 
 Item::Item(){
-    is_option_visible = false;
+    hidden = true;
     
     hitbox = Rect(Point(50,50,0), 200, 200);
     options[0] = Rect(Point(100,50,0), 70, 50);
-    options[1] = Rect(Point(100,100,0), 70, 50);
+    options[1] = Rect(Point(100,110,0), 70, 50);
 }
 
 Item::~Item(){
@@ -25,7 +25,7 @@ void Item::render(){
     glPushMatrix();
     glColor3f(0, 1, 1);
     hitbox.render();
-    if (is_option_visible) {
+    if (!hidden) {
         glColor3f(1, 1, 0);
         for (unsigned int i = 0; i < 2; i++) options[i].render();
     }

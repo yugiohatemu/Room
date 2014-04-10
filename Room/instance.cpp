@@ -37,3 +37,7 @@ void Instance::clean_all(){
 Texture& Instance::texture(){
     return m_texture;
 }
+
+BottomInfo& Instance::bottomInfo(){
+    return m_bottomInfo;
+}

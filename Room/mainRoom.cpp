@@ -10,6 +10,7 @@
 #include <OpenGL/OpenGL.h>
 #include <SDL2/SDL_opengl.h>
 #include <iostream>
+#include "instance.h"
 
 MainRoom::MainRoom(){
     pos.x = 240;
@@ -38,7 +39,7 @@ void MainRoom::render(){
     }
     
     obstacle->render();
-    
+    Instance::get().bottomInfo().render();
     glPushMatrix();
     
     glColor3f(1, 0, 0);
@@ -78,20 +79,27 @@ void MainRoom::update(SDL_Event event){
         for (unsigned int i = 0; i < 1; i++) {
             if (obstacle->is_item_being_hit(new_pos)) {
                 
-                if (obstacle->is_option_visible) {
+                if (!obstacle->hidden) { //note, heere should be option->hidden
                     
                     int option_hit = obstacle->get_option_being_hit(new_pos);
                     if (option_hit != -1) { //hit actually happens on option
                         std::cout<<"Hit option "<<option_hit<<std::endl;
                     }
+                    if (option_hit == 0) { //0
+                        //set the info on bottom pop up
+                        Instance::get().bottomInfo().set_info("Hi\n"); //get info from the option in futrue
+                        Instance::get().bottomInfo().hidden = false;
+                    }
                     break;
                 }else { //close enough
-                    obstacle->is_option_visible = true;
+                    obstacle->hidden = false;
+//                    Instance::get().bottomInfo().hidden = false;
                     break;
                     
                 }
             }else{
-                obstacle->is_option_visible = false;
+                obstacle->hidden = true;
+                Instance::get().bottomInfo().hidden = true;
             }
 
         }

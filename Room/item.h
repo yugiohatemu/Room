@@ -15,7 +15,7 @@ class Item{
     Rect hitbox;
     Rect options[2];
 public:
-    bool is_option_visible;
+    bool hidden;
     
     Item();
     ~Item();
