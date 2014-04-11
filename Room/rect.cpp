@@ -34,24 +34,10 @@ void Rect::render(){
 bool Rect::is_pos_in_rec(Point pos){
     return (pos.x >= points[0].x && pos.x <= points[1].x && pos.y >= points[0].y && pos.y <= points[3].y);
 }
-/*
-Vector Rect::get_closest_dir(Point pos, Vector dir){
-    //check against each interscetion
-    int order[] = {0,1,2,3,0}; //lazy cheat for cycle
-    float t = 1.0f;
-    for (unsigned int i = 0; i < 4; i++) { //x * vec.y - y * vec.x
-        Vector edge_vec = points[order[i+1]]- points[order[i]];
-        float div_down = dir.x * edge_vec.y - dir.y * edge_vec.x;
-        
-        if (div_down != 0) {
-            Vector ray = points[order[i]]- pos;
-            float next_t = (ray.x * edge_vec.y - ray.y * edge_vec.x) /div_down;
-            float next_u = (ray.x * dir.y - ray.y * dir.x) / div_down;
-            
-            //within line segment, and less than the previous one, replace it
-            if (next_t > 0 &&  next_t < t && next_u >= 0 && next_u <= 1) t = next_t;
-        }
-    }
-    
-    return dir * t;
-}*/
+
+float Rect::width(){
+    return points[1].x - points[0].x;
+}
+float Rect::height(){
+    return points[3].y - points[0].y;
+}

@@ -8,6 +8,8 @@
 
 #ifndef Room_clip_h
 #define Room_clip_h
+const float TEXT_WIDTH = 0.125;
+const float TEXT_HEIGHT = 0.1875;
 
 float TEXT_CLIP[] = {
     //'A','B','C','D','E','F','G','H',
@@ -44,8 +46,8 @@ float TEXT_CLIP[] = {
 //256/8 = 32
 float ITEM_CLIP [] ={
     0,0, 0.250, 0.375, //Bed
-    0.250, 0, 0.250, 0.250 //X
-    0.250,0.250,0.250,0.125 //Fod
+    0.250, 0, 0.250, 0.250, //X
+    0.250,0.250,0.250,0.125, //Fod
     0.5, 0, 0.375, 0.125, //Book
     0.5,0.125,0.375, 0.250,
     0, 0.5, 0.125,0.375 ,//player

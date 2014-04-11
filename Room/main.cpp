@@ -14,6 +14,7 @@
 #include <string>
 #include "mainRoom.h"
 #include "timer.h"
+#include "instance.h"
 //Minimum Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -49,11 +50,13 @@ int main( int argc, char* args[] ){
 				
                 //Initialize OpenGl
                 {
+                    glEnable(GL_TEXTURE_2D);
+                    glShadeModel(GL_SMOOTH);
+                    
                     glMatrixMode(GL_PROJECTION);
                     glLoadIdentity();
                     glOrtho(0,SCREEN_WIDTH,SCREEN_HEIGHT,0,-1,1);
                     glMatrixMode(GL_MODELVIEW);
-                    glShadeModel(GL_SMOOTH);
                     glLoadIdentity();
                 }
 			}
@@ -66,7 +69,7 @@ int main( int argc, char* args[] ){
 		//Main loop flag
 		bool quit = false;
 //				SDL_StartTextInput();
-        
+        Instance::get().load_all();
         MainRoom * main_room = new MainRoom();
         //Handle events on queue
         SDL_Event event;
@@ -90,16 +93,15 @@ int main( int argc, char* args[] ){
             SDL_GL_SwapWindow( gWindow );
 		}
         delete main_room;
-		
-		//Disable text input
-//		SDL_StopTextInput();
+        Instance::get().clean_all();
+		//Disable text input SDL_StopTextInput();
 	}
     
 	//Close and free
 //    SDL_GL_DeleteContext(gContext);
     SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
-    
+
 	//Quit SDL subsystems
 	SDL_Quit();
 	return 0;

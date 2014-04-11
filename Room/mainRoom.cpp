@@ -19,10 +19,12 @@ MainRoom::MainRoom(){
     next_pos = pos;
     speed_factor = 5;
     obstacle = new Item();
+    text = new Text(Rect(Point(200,200,0), 200, 100),"HI\nHow are you");
 }
 
 MainRoom::~MainRoom(){
     delete obstacle;
+    delete text;
 }
 
 void MainRoom::render(){
@@ -40,6 +42,7 @@ void MainRoom::render(){
     
     obstacle->render();
     Instance::get().bottomInfo().render();
+    text->render();
     glPushMatrix();
     
     glColor3f(1, 0, 0);

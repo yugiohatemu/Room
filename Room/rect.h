@@ -16,8 +16,9 @@ struct Rect{
     Rect();
     Rect(Point left_top, int width, int height);
     bool is_pos_in_rec(Point pos);
-//    Vector get_closest_dir(Point pos, Vector dir);
     void render();
+    float width();
+    float height();
 };
 
 #endif /* defined(__Room__rect__) */

@@ -15,8 +15,10 @@
 class Text{
     std::string s;
     Rect rect;
+    float col_size;
+    float row_size;
 public:
-    Text(std::string s);
+    Text(Rect rect, std::string s);
     ~Text();
     void render();
 };

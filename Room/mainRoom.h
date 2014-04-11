@@ -13,12 +13,13 @@
 #include <SDL2/SDL_events.h>
 #include "rect.h"
 #include "item.h"
-
+#include "text.h"
 class MainRoom{
     Point pos;
     Point next_pos;
     Vector speed;
     Item *obstacle;
+    Text * text;
     float speed_factor;
 public:
     MainRoom();
