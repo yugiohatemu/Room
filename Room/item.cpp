@@ -9,12 +9,11 @@
 #include "item.h"
 #include <OpenGL/OpenGL.h>
 #include <SDL2/SDL_opengl.h>
-
+#include "instance.h"
 Item::Item(){
     hidden = true;
-    
-    hitbox = Rect(Point(50,50,0), 200, 200);
-    options[0] = Rect(Point(100,50,0), 70, 50);
+
+    options[0] = Rect(Point(100,50,0), 70, 50); //should be text
     options[1] = Rect(Point(100,110,0), 70, 50);
 }
 
@@ -23,8 +22,25 @@ Item::~Item(){
 
 void Item::render(){
     glPushMatrix();
+    GLuint texture_ID = Instance::get().texture().get_texture(Texture::ITEM);
+    
+    glBindTexture(GL_TEXTURE_2D, texture_ID);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]);
+    glVertex2f(hitbox.points[0].x, hitbox.points[0].y);
+    glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1]);
+    glVertex2f(hitbox.points[1].x, hitbox.points[1].y);
+    glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1] + ITEM_CLIP[4 * type + 3]);
+    glVertex2f(hitbox.points[2].x, hitbox.points[2].y);
+    glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]+ ITEM_CLIP[4 * type + 2]);
+    glVertex2f(hitbox.points[3].x, hitbox.points[3].y);
+    glEnd();
+    
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
     glColor3f(0, 1, 1);
-    hitbox.render();
     if (!hidden) {
         glColor3f(1, 1, 0);
         for (unsigned int i = 0; i < 2; i++) options[i].render();

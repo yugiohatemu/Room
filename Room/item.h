@@ -12,11 +12,13 @@
 #include "rect.h"
 
 class Item{
-    Rect hitbox;
-    Rect options[2];
+   
 public:
     bool hidden;
+    Rect hitbox;
+    Rect options[2];
     
+    unsigned int type;
     Item();
     ~Item();
     

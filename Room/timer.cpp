@@ -31,11 +31,3 @@ void Timer::start(){
     time_accum = 0;
     start_tick = SDL_GetTicks();
 }
-
-//float Timer::get_accum_time(){
-//    return time_accum;
-//}
-//
-//void Timer::reset(){
-//    time_accum = 0;
-//}

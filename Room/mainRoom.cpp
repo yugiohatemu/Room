@@ -18,13 +18,27 @@ MainRoom::MainRoom(){
     pos.z = 0;
     next_pos = pos;
     speed_factor = 5;
-    obstacle = new Item();
-    text = new Text(Rect(Point(200,200,0), 200, 100),"HI\nHow are you");
+    //TODO: set options to be text
+    bed = new Item();
+    bed->hitbox = Rect(Point(50,50,0),150,200);
+    bed->type = ITEM_BED;
+    
+    //yap...
+    X = new Item();
+    X->hitbox = Rect(Point(500, 50, 0),80 ,80);
+    X->type = ITEM_X;
+    //
+    book = new Item();
+    book->hitbox = Rect(Point(50, 350, 0),100 ,60);
+    book->type = ITEM_BOOK;
+    
+    //push everything into a vector...yap
 }
 
 MainRoom::~MainRoom(){
-    delete obstacle;
-    delete text;
+    delete bed;
+    delete X;
+    delete book;
 }
 
 void MainRoom::render(){
@@ -40,9 +54,12 @@ void MainRoom::render(){
         }
     }
     
-    obstacle->render();
+    bed->render();
+    X->render();
+    book->render();
+    
     Instance::get().bottomInfo().render();
-    text->render();
+
     glPushMatrix();
     
     glColor3f(1, 0, 0);
@@ -69,7 +86,7 @@ void MainRoom::update(SDL_Event event){
         
         //Get the closeset one as the real next_pos;
         for (unsigned int i = 0; i < 1; i++) {
-            Vector next_dir = obstacle->get_closest_dir(pos, dir);
+            Vector next_dir = bed->get_closest_dir(pos, dir);
             float next_dis = next_dir.get_norm();
                     
             if (next_dis < dis) {
@@ -78,13 +95,13 @@ void MainRoom::update(SDL_Event event){
             }
         
         }
-        
+        //we can get a vector here, just to make things easy?
         for (unsigned int i = 0; i < 1; i++) {
-            if (obstacle->is_item_being_hit(new_pos)) {
+            if (bed->is_item_being_hit(new_pos)) {
                 
-                if (!obstacle->hidden) { //note, heere should be option->hidden
+                if (!bed->hidden) { //note, heere should be option->hidden
                     
-                    int option_hit = obstacle->get_option_being_hit(new_pos);
+                    int option_hit = bed->get_option_being_hit(new_pos);
                     if (option_hit != -1) { //hit actually happens on option
                         std::cout<<"Hit option "<<option_hit<<std::endl;
                     }
@@ -95,13 +112,13 @@ void MainRoom::update(SDL_Event event){
                     }
                     break;
                 }else { //close enough
-                    obstacle->hidden = false;
+                    bed->hidden = false;
 //                    Instance::get().bottomInfo().hidden = false;
                     break;
                     
                 }
             }else{
-                obstacle->hidden = true;
+                bed->hidden = true;
                 Instance::get().bottomInfo().hidden = true;
             }
 

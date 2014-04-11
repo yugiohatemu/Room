@@ -43,6 +43,16 @@ float TEXT_CLIP[] = {
     0,0.5625,
     0.125,0.5625,
 };
+
+enum ITEM_TYPE{
+    ITEM_BED = 0,
+    ITEM_X,
+    ITEM_FOOD,
+    ITEM_BOOK,
+    ITEM_CARPET,
+    ITEM_PLAYER,
+    ITEM_GHOST,
+};
 //256/8 = 32
 float ITEM_CLIP [] ={
     0,0, 0.250, 0.375, //Bed

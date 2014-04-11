@@ -14,12 +14,16 @@
 #include "rect.h"
 #include "item.h"
 #include "text.h"
+#include <vector>
+
 class MainRoom{
     Point pos;
     Point next_pos;
     Vector speed;
-    Item *obstacle;
-    Text * text;
+    std::vector<Item *> all_items;
+    Item * bed;
+    Item * X;
+    Item * book;
     float speed_factor;
 public:
     MainRoom();
