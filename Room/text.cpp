@@ -28,9 +28,26 @@ void Text::render(){
     glBindTexture(GL_TEXTURE_2D, texture_ID);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     
-    //start drawing
-    glLoadIdentity();
+    //split based on \n
+    unsigned int i = 0;
+    unsigned int j = 0;
+    glBegin(GL_QUADS);
+    for (unsigned int counter = 0; counter < s.length() ; counter++) {
+        if (s[counter] == '\n') {
+            i = 0;
+            j++;
+        }else{
+            if (s[counter] != ' ') {
+                glVertex2f( i * 32, j * 32 ); glTexCoord2f( 0 ,0 );
+                glVertex2f( i * 32 + 32, j * 32 ); glTexCoord2f( 0 ,0 );
+                glVertex2f( i * 32 + 32, j * 32 + 32 ); glTexCoord2f( 0 ,0 );
+                glVertex2f( i * 32, j * 32 + 32); glTexCoord2f( 0 ,0 );
+            }
+            i++;
+        }
+    }
     
+    glEnd();
     glBindTexture(GL_TEXTURE_2D, 0);
     glPopMatrix();
     

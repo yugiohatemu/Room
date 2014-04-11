@@ -10,9 +10,11 @@
 #define __Room__text__
 
 #include <string>
+#include "rect.h"
 
 class Text{
     std::string s;
+    Rect rect;
 public:
     Text(std::string s);
     ~Text();

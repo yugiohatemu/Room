@@ -19,8 +19,10 @@ void BottomInfo::render(){
     glPushMatrix();
     glColor4f(1, 1, 1, 0.5);
     boarder.render();
-    //TODO:render text with mapping to texture
     
+    for (unsigned int i = 0, j = 0; i < info.size(); i++) {
+        
+    }
     
     glPopMatrix();
 }

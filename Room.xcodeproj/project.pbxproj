@@ -64,6 +64,9 @@
 		3B63181218F483DD004A6369 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		3B63181418F49DDE004A6369 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 		3B63181518F49DDE004A6369 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
+		3BB71C0418F78B5F00B858D0 /* fontTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fontTile.png; sourceTree = "<group>"; };
+		3BB71C0518F78B5F00B858D0 /* item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item.png; sourceTree = "<group>"; };
+		3BB71C0918F7924900B858D0 /* clip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clip.h; sourceTree = "<group>"; };
 		3BB88FFC18F5BCE900127E17 /* item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = item.cpp; sourceTree = "<group>"; };
 		3BB88FFD18F5BCE900127E17 /* item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = item.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,14 +89,15 @@
 		3B0C0C3F18F73B2700D13EE0 /* Instance */ = {
 			isa = PBXGroup;
 			children = (
-				3B0C0C3018F73B1900D13EE0 /* bottomInfo.cpp */,
-				3B0C0C3118F73B1900D13EE0 /* bottomInfo.h */,
 				3B0C0C3218F73B1900D13EE0 /* instance.cpp */,
 				3B0C0C3318F73B1900D13EE0 /* instance.h */,
+				3B0C0C3018F73B1900D13EE0 /* bottomInfo.cpp */,
+				3B0C0C3118F73B1900D13EE0 /* bottomInfo.h */,
 				3B0C0C3418F73B1900D13EE0 /* loadPNG.cpp */,
 				3B0C0C3518F73B1900D13EE0 /* loadPNG.h */,
 				3B0C0C3818F73B1900D13EE0 /* texture.cpp */,
 				3B0C0C3918F73B1900D13EE0 /* texture.h */,
+				3BB71C0918F7924900B858D0 /* clip.h */,
 			);
 			name = Instance;
 			sourceTree = "<group>";
@@ -121,7 +125,6 @@
 		3B6317F918F45C62004A6369 /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				3B0C0C3F18F73B2700D13EE0 /* Instance */,
 				3B0C0C3618F73B1900D13EE0 /* text.cpp */,
 				3B0C0C3718F73B1900D13EE0 /* text.h */,
 				3B6317FA18F45C62004A6369 /* main.cpp */,
@@ -136,8 +139,19 @@
 				3B63181118F483DD004A6369 /* timer.cpp */,
 				3B63181218F483DD004A6369 /* timer.h */,
 				3B6317FC18F45C62004A6369 /* Room.1 */,
+				3B0C0C3F18F73B2700D13EE0 /* Instance */,
+				3BB71C0318F78AF800B858D0 /* Image */,
 			);
 			path = Room;
+			sourceTree = "<group>";
+		};
+		3BB71C0318F78AF800B858D0 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				3BB71C0418F78B5F00B858D0 /* fontTile.png */,
+				3BB71C0518F78B5F00B858D0 /* item.png */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

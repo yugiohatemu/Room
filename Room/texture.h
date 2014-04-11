@@ -17,8 +17,7 @@ class Texture{
     
 public:
     enum{
-        MARBLE,
-        TILE,
+        ITEM,
         FONT,
         TOTAL_TEXTURE,
     }TEXTURE_TYPE;

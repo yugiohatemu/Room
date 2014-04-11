@@ -26,8 +26,8 @@ Instance& Instance::get(){
 }
 
 void Instance::load_all(){
-    m_texture.load_file("", 0, 0);
-    
+    m_texture.load_file("/Users/yuehuang/Desktop/Room/Room/item.png", 256, 256);
+    m_texture.load_file("/Users/yuehuang/Desktop/Room/Room/fontTile.png", 512, 512);
 }
 
 void Instance::clean_all(){
