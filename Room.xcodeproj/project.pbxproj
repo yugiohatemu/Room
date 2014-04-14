@@ -22,6 +22,7 @@
 		3B63181018F47343004A6369 /* mainRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63180E18F47343004A6369 /* mainRoom.cpp */; };
 		3B63181318F483DD004A6369 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181118F483DD004A6369 /* timer.cpp */; };
 		3B63181618F49DDE004A6369 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181418F49DDE004A6369 /* rect.cpp */; };
+		3BB71C0C18FC205E00B858D0 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C0A18FC205E00B858D0 /* player.cpp */; };
 		3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB88FFC18F5BCE900127E17 /* item.cpp */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +67,9 @@
 		3B63181518F49DDE004A6369 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
 		3BB71C0418F78B5F00B858D0 /* fontTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fontTile.png; sourceTree = "<group>"; };
 		3BB71C0518F78B5F00B858D0 /* item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item.png; sourceTree = "<group>"; };
-		3BB71C0918F7924900B858D0 /* clip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clip.h; sourceTree = "<group>"; };
+		3BB71C0918F7924900B858D0 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
+		3BB71C0A18FC205E00B858D0 /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
+		3BB71C0B18FC205E00B858D0 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
 		3BB88FFC18F5BCE900127E17 /* item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = item.cpp; sourceTree = "<group>"; };
 		3BB88FFD18F5BCE900127E17 /* item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = item.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,7 +100,7 @@
 				3B0C0C3518F73B1900D13EE0 /* loadPNG.h */,
 				3B0C0C3818F73B1900D13EE0 /* texture.cpp */,
 				3B0C0C3918F73B1900D13EE0 /* texture.h */,
-				3BB71C0918F7924900B858D0 /* clip.h */,
+				3BB71C0918F7924900B858D0 /* const.h */,
 			);
 			name = Instance;
 			sourceTree = "<group>";
@@ -138,6 +141,8 @@
 				3B63181518F49DDE004A6369 /* rect.h */,
 				3B63181118F483DD004A6369 /* timer.cpp */,
 				3B63181218F483DD004A6369 /* timer.h */,
+				3BB71C0A18FC205E00B858D0 /* player.cpp */,
+				3BB71C0B18FC205E00B858D0 /* player.h */,
 				3B6317FC18F45C62004A6369 /* Room.1 */,
 				3B0C0C3F18F73B2700D13EE0 /* Instance */,
 				3BB71C0318F78AF800B858D0 /* Image */,
@@ -213,6 +218,7 @@
 				3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */,
 				3B6317FB18F45C62004A6369 /* main.cpp in Sources */,
 				3B63181618F49DDE004A6369 /* rect.cpp in Sources */,
+				3BB71C0C18FC205E00B858D0 /* player.cpp in Sources */,
 				3B0C0C3D18F73B1900D13EE0 /* text.cpp in Sources */,
 				3B63181318F483DD004A6369 /* timer.cpp in Sources */,
 				3B0C0C3E18F73B1900D13EE0 /* texture.cpp in Sources */,

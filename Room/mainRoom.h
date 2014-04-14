@@ -12,19 +12,20 @@
 #include "algebra.h"
 #include <SDL2/SDL_events.h>
 #include "rect.h"
-#include "item.h"
 #include "text.h"
 #include <vector>
+class Player;
+class Item;
 
 class MainRoom{
     Point pos;
     Point next_pos;
     Vector speed;
     std::vector<Item *> all_items;
-    Item * bed;
-    Item * X;
-    Item * book;
     float speed_factor;
+    Player * player;
+    
+    int one_turn;
 public:
     MainRoom();
     ~MainRoom();

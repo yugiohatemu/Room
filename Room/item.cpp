@@ -26,7 +26,8 @@ void Item::render(){
     
     glBindTexture(GL_TEXTURE_2D, texture_ID);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
+    //0,1,2,3
+    //x,y,w,h
     glBegin(GL_QUADS);
     glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]);
     glVertex2f(hitbox.points[0].x, hitbox.points[0].y);
@@ -34,7 +35,7 @@ void Item::render(){
     glVertex2f(hitbox.points[1].x, hitbox.points[1].y);
     glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1] + ITEM_CLIP[4 * type + 3]);
     glVertex2f(hitbox.points[2].x, hitbox.points[2].y);
-    glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]+ ITEM_CLIP[4 * type + 2]);
+    glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]+ ITEM_CLIP[4 * type + 3]);
     glVertex2f(hitbox.points[3].x, hitbox.points[3].y);
     glEnd();
     

@@ -11,7 +11,7 @@
 
 #include "texture.h"
 #include "bottomInfo.h"
-#include "clip.h"
+#include "const.h"
 class Instance{
 private:
     Instance();  // Private so that it can  not be called

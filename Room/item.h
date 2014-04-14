@@ -19,14 +19,16 @@ public:
     Rect options[2];
     
     unsigned int type;
+    int ph_charge; //+ is increase, - is decrease on usage
+    int mh_charge; //also each item has a turn cost
+    int turn_cost;
+    
     Item();
     ~Item();
-    
-    Vector get_closest_dir(Point pos, Vector dir);
-
     void render();
     bool is_item_being_hit(Point pos);
     int get_option_being_hit(Point pos);
+    Vector get_closest_dir(Point pos, Vector dir);
 };
 
 #endif /* defined(__Room__item__) */

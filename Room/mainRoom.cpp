@@ -11,34 +11,46 @@
 #include <SDL2/SDL_opengl.h>
 #include <iostream>
 #include "instance.h"
+#include "item.h"
+#include "player.h"
 
 MainRoom::MainRoom(){
-    pos.x = 240;
-    pos.y = 320;
-    pos.z = 0;
+    pos = Point(240, 320,0);
     next_pos = pos;
     speed_factor = 5;
+    one_turn = ONE_TURN_COST;
+    
+    
     //TODO: set options to be text
-    bed = new Item();
+    Item *bed = new Item();
     bed->hitbox = Rect(Point(50,50,0),150,200);
     bed->type = ITEM_BED;
-    
+    bed->turn_cost = 0;
     //yap...
-    X = new Item();
+    Item *X = new Item();
     X->hitbox = Rect(Point(500, 50, 0),80 ,80);
     X->type = ITEM_X;
+    X->turn_cost = 0;
     //
-    book = new Item();
+    Item *book = new Item();
     book->hitbox = Rect(Point(50, 350, 0),100 ,60);
     book->type = ITEM_BOOK;
+    book->turn_cost = 0;
     
     //push everything into a vector...yap
+    all_items.push_back(bed);
+    all_items.push_back(X);
+    all_items.push_back(book);
+    
+    player = new Player();
+    player->hitbox = Rect(Point(),40,120);
 }
 
 MainRoom::~MainRoom(){
-    delete bed;
-    delete X;
-    delete book;
+    for (unsigned int i = 0; i < all_items.size(); i++) {
+        delete all_items[i];
+    }
+    delete player;
 }
 
 void MainRoom::render(){
@@ -54,22 +66,15 @@ void MainRoom::render(){
         }
     }
     
-    bed->render();
-    X->render();
-    book->render();
+    for (unsigned int i = 0; i < all_items.size(); i++) {
+        all_items[i]->render();
+    }
     
     Instance::get().bottomInfo().render();
 
     glPushMatrix();
-    
-    glColor3f(1, 0, 0);
     glTranslatef(pos.x, pos.y, 0);
-    
-    glBegin( GL_QUADS );
-    glVertex2f( 0 , 0  ); glVertex2f( 0 , 50 );
-    glVertex2f( 50, 50 ); glVertex2f( 50, 0  );
-    glEnd();
-    
+    player->render();
     glPopMatrix();
 }
 
@@ -85,8 +90,8 @@ void MainRoom::update(SDL_Event event){
         float dis = dir.get_norm();
         
         //Get the closeset one as the real next_pos;
-        for (unsigned int i = 0; i < 1; i++) {
-            Vector next_dir = bed->get_closest_dir(pos, dir);
+        for (unsigned int i = 0; i < all_items.size(); i++) {
+            Vector next_dir = all_items[i]->get_closest_dir(pos, dir);
             float next_dis = next_dir.get_norm();
                     
             if (next_dis < dis) {
@@ -96,29 +101,37 @@ void MainRoom::update(SDL_Event event){
         
         }
         //we can get a vector here, just to make things easy?
-        for (unsigned int i = 0; i < 1; i++) {
-            if (bed->is_item_being_hit(new_pos)) {
+        for (unsigned int i = 0; i < all_items.size(); i++) {
+            if (all_items[i]->is_item_being_hit(new_pos)) {
                 
-                if (!bed->hidden) { //note, heere should be option->hidden
+                if (!all_items[i]->hidden) { //note, here should be option->hidden
                     
-                    int option_hit = bed->get_option_being_hit(new_pos);
+                    int option_hit = all_items[i]->get_option_being_hit(new_pos);
                     if (option_hit != -1) { //hit actually happens on option
                         std::cout<<"Hit option "<<option_hit<<std::endl;
                     }
+                    
                     if (option_hit == 0) { //0
-                        //set the info on bottom pop up
-                        Instance::get().bottomInfo().set_info("Hi\n"); //get info from the option in futrue
+                        //get info from the option in futrue
+                        Instance::get().bottomInfo().set_info("Hi\n");
                         Instance::get().bottomInfo().hidden = false;
+                    }else if(option_hit == 1){ //use
+                        //TODO:
+                        player->physical_health += all_items[i]->ph_charge;
+                        player->mental_health += all_items[i]->mh_charge;
+                        one_turn -= all_items[i]->turn_cost;
+                        if (one_turn <= 0) { //reset
+                            one_turn = ONE_TURN_COST;
+                            //reset
+                        }
+                        
                     }
                     break;
                 }else { //close enough
-                    bed->hidden = false;
-//                    Instance::get().bottomInfo().hidden = false;
-                    break;
-                    
+                    all_items[i]->hidden = false;
                 }
             }else{
-                bed->hidden = true;
+                all_items[i]->hidden = true;
                 Instance::get().bottomInfo().hidden = true;
             }
 
