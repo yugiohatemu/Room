@@ -16,6 +16,7 @@
 
 class Player;
 class Item;
+class Text;
 
 class MainRoom{
     Point pos;
@@ -24,7 +25,7 @@ class MainRoom{
     std::vector<Item *> all_items;
     float speed_factor;
     Player * player;
-    
+    Text * turnScreen;
     int one_turn;
 public:
     MainRoom();

@@ -16,10 +16,11 @@ class Text{
 public:
     Rect hitbox;
     std::string s;
-
+    float text_width, text_height;
     Text(Point pos, std::string s);
     ~Text();
     void render();
+    void set_text(std::string text);
 };
 
 #endif /* defined(__Room__text__) */

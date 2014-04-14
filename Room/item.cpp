@@ -36,15 +36,16 @@ void Item::render(){
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     //0,1,2,3
     //x,y,w,h
+    Point top_left = hitbox.top_left;
     glBegin(GL_QUADS);
     glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]);
-    glVertex2f(hitbox.points[0].x, hitbox.points[0].y);
+    glVertex2f(top_left.x, top_left.y);
     glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1]);
-    glVertex2f(hitbox.points[1].x, hitbox.points[1].y);
+    glVertex2f(top_left.x + hitbox.width, top_left.y);
     glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1] + ITEM_CLIP[4 * type + 3]);
-    glVertex2f(hitbox.points[2].x, hitbox.points[2].y);
+    glVertex2f(top_left.x + hitbox.width, top_left.y + hitbox.height);
     glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]+ ITEM_CLIP[4 * type + 3]);
-    glVertex2f(hitbox.points[3].x, hitbox.points[3].y);
+    glVertex2f(top_left.x, top_left.y + hitbox.height);
     glEnd();
     
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -63,15 +64,21 @@ void Item::render(){
 }
 
 Vector Item::get_closest_dir(Point pos, Vector dir){
-    //check against each interscetion
-    int order[] = {0,1,2,3,0}; //lazy cheat for cycle
+    //lazy cheat to create cycle
     float t = 1.0f;
+    Point points[5];
+    points[0] = hitbox.top_left;
+    points[1] = points[0]; points[1].x += hitbox.width;
+    points[2] = points[1]; points[2].y += hitbox.height;
+    points[3] = points[0]; points[3].y += hitbox.height;
+    points[4] = points[0];
+    
     for (unsigned int i = 0; i < 4; i++) { //x * vec.y - y * vec.x
-        Vector edge_vec = hitbox.points[order[i+1]]- hitbox.points[order[i]];
+        Vector edge_vec = points[i+1]- points[i];
         float div_down = dir.x * edge_vec.y - dir.y * edge_vec.x;
         
         if (div_down != 0) {
-            Vector ray = hitbox.points[order[i]]- pos;
+            Vector ray = points[i]- pos;
             float next_t = (ray.x * edge_vec.y - ray.y * edge_vec.x) /div_down;
             float next_u = (ray.x * dir.y - ray.y * dir.x) / div_down;
             

@@ -30,15 +30,16 @@ void Player::render(){
     glBindTexture(GL_TEXTURE_2D, texture_ID);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     
+    Point top_left = hitbox.top_left;
     glBegin(GL_QUADS);
     glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]);
-    glVertex2f(hitbox.points[0].x, hitbox.points[0].y);
+    glVertex2f(top_left.x, top_left.y);
     glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1]);
-    glVertex2f(hitbox.points[1].x, hitbox.points[1].y);
+    glVertex2f(top_left.x + hitbox.width, top_left.y);
     glTexCoord2f(ITEM_CLIP[4 * type] + ITEM_CLIP[4 * type + 2], ITEM_CLIP[4 * type + 1] + ITEM_CLIP[4 * type + 3]);
-    glVertex2f(hitbox.points[2].x, hitbox.points[2].y);
+    glVertex2f(top_left.x + hitbox.width, top_left.y + hitbox.height);
     glTexCoord2f(ITEM_CLIP[4 * type], ITEM_CLIP[4 * type + 1]+ ITEM_CLIP[4 * type + 3]);
-    glVertex2f(hitbox.points[3].x, hitbox.points[3].y);
+    glVertex2f(top_left.x, top_left.y + hitbox.height);
     glEnd();
     
     glBindTexture(GL_TEXTURE_2D, 0);

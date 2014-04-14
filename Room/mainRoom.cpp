@@ -10,10 +10,12 @@
 #include <OpenGL/OpenGL.h>
 #include <SDL2/SDL_opengl.h>
 #include <iostream>
+#include <sstream>
 #include "instance.h"
 #include "item.h"
 #include "player.h"
 #include "text.h"
+
 
 MainRoom::MainRoom(){
     pos = Point(240, 320,0);
@@ -84,8 +86,6 @@ void MainRoom::render(){
     for (unsigned int i = 0; i < all_items.size(); i++) {
         all_items[i]->render();
     }
-    
-//    Instance::get().bottomInfo().render();
 
     glPushMatrix();
     glTranslatef(pos.x, pos.y, 0);

@@ -13,7 +13,14 @@
 #include <ctype.h>
 
 
-Text::Text(Point pos, std::string s):s(s){
+Text::Text(Point pos, std::string t){
+    hitbox.top_left = pos;
+    set_text(t);
+}
+
+void Text::set_text(std::string t){
+    s = t;
+    
     unsigned row_count = 1;
     unsigned col_count = 0;
     unsigned col_max = 0;
@@ -28,9 +35,18 @@ Text::Text(Point pos, std::string s):s(s){
         }
     }
     col_max = std::max(col_max, col_count);
+    if (col_max * TEXT_WIDTH > SCREEN_WIDTH) {
+        text_width = SCREEN_WIDTH /(float) col_max;
+    }else{
+        text_width = TEXT_WIDTH;
+    }
+    text_height = TEXT_HEIGHT;
+    
+    hitbox.width = col_max * text_width;
+    hitbox.height = row_count * text_height;
 
-    hitbox = Rect(pos, col_max * TEXT_WIDTH, row_count * TEXT_HEIGHT);
 }
+
 
 Text::~Text(){
     
@@ -50,7 +66,7 @@ void Text::render(){
     //split based on \n
     unsigned int i = 0;
     unsigned int j = 0;
-    Point top = hitbox.points[0];
+    Point top = hitbox.top_left;
     glBegin(GL_QUADS);
     for (unsigned int counter = 0; counter < s.length() ; counter++) {
         if (s[counter] == '\n') {
@@ -60,10 +76,10 @@ void Text::render(){
             if (isalpha(s[counter])) {
                 unsigned int c = toupper(s[counter]) - 'A';
                 
-                glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1]); glVertex2f( top.x + i * TEXT_WIDTH, top.y + j * TEXT_HEIGHT );
-                glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1]); glVertex2f( top.x +(i+1) * TEXT_WIDTH, top.y + j * TEXT_HEIGHT );
-                glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +(i+1) * TEXT_WIDTH, top.y + (j+1) * TEXT_HEIGHT );
-                glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +i * TEXT_WIDTH, top.y + (j+1) * TEXT_HEIGHT );
+                glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1]); glVertex2f( top.x + i * text_width, top.y + j * text_height );
+                glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1]); glVertex2f( top.x +(i+1) * text_width, top.y + j * text_height );
+                glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +(i+1) * text_width, top.y + (j+1) * text_height );
+                glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +i * text_width, top.y + (j+1) * text_height );
             }
             i++;
         }

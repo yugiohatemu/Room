@@ -12,13 +12,14 @@
 #include "algebra.h"
 
 struct Rect{
-    Point points[4];
+    Point top_left;
+    float width;
+    float height;
     Rect();
     Rect(Point left_top, int width, int height);
     bool is_pos_in_rec(Point pos);
     void render();
-    float width();
-    float height();
+
 };
 
 #endif /* defined(__Room__rect__) */
