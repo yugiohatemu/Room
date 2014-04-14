@@ -10,13 +10,16 @@
 #define __Room__item__
 
 #include "rect.h"
+class Text;
 
 class Item{
    
 public:
-    bool hidden;
+    bool option_hidden;
+    bool info_hidden;
     Rect hitbox;
-    Rect options[2];
+    Text* options[2];
+    Text* info;
     
     unsigned int type;
     int ph_charge; //+ is increase, - is decrease on usage

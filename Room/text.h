@@ -13,12 +13,11 @@
 #include "rect.h"
 
 class Text{
-    std::string s;
-    Rect rect;
-    float col_size;
-    float row_size;
 public:
-    Text(Rect rect, std::string s);
+    Rect hitbox;
+    std::string s;
+
+    Text(Point pos, std::string s);
     ~Text();
     void render();
 };

@@ -10,14 +10,22 @@
 #include <OpenGL/OpenGL.h>
 #include <SDL2/SDL_opengl.h>
 #include "instance.h"
-Item::Item(){
-    hidden = true;
+#include "text.h"
 
-    options[0] = Rect(Point(100,50,0), 70, 50); //should be text
-    options[1] = Rect(Point(100,110,0), 70, 50);
+Item::Item(){
+    option_hidden = true;
+    info_hidden = true;
+    options[0] = NULL;
+    options[1] = NULL;
+    info = NULL;
+    //or we should show info directly on clicked based
 }
 
 Item::~Item(){
+    if(options[0]) delete options[0];
+    if(options[1]) delete options[1];
+    
+    delete info;
 }
 
 void Item::render(){
@@ -41,11 +49,16 @@ void Item::render(){
     
     glBindTexture(GL_TEXTURE_2D, 0);
     
-    glColor3f(0, 1, 1);
-    if (!hidden) {
-        glColor3f(1, 1, 0);
-        for (unsigned int i = 0; i < 2; i++) options[i].render();
+    if (!option_hidden) {
+        for (unsigned int i = 0; i < 2; i++) {
+            if(options[i])options[i]->render();
+        }
     }
+    if (!info_hidden) {
+        if(info) info->render();
+    }
+    
+    
     glPopMatrix();
 }
 
@@ -72,7 +85,7 @@ Vector Item::get_closest_dir(Point pos, Vector dir){
 
 bool Item::is_item_being_hit(Point pos){
     for (unsigned int i = 0; i < 2; i++) {
-        if (options[i].is_pos_in_rec(pos)) return true;
+        if (options[i]->hitbox.is_pos_in_rec(pos)) return true;
     }
     return hitbox.is_pos_in_rec(pos);
 }
@@ -80,7 +93,7 @@ bool Item::is_item_being_hit(Point pos){
 //-1 is hiting on the original
 int Item::get_option_being_hit(Point pos){
     for (unsigned int i = 0; i < 2; i++) {
-        if (options[i].is_pos_in_rec(pos)) return i;
+        if (options[i]->hitbox.is_pos_in_rec(pos)) return i;
     }
     return -1;
 }

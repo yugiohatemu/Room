@@ -12,8 +12,8 @@
 #include "algebra.h"
 #include <SDL2/SDL_events.h>
 #include "rect.h"
-#include "text.h"
 #include <vector>
+
 class Player;
 class Item;
 

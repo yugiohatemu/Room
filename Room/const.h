@@ -11,8 +11,11 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-const float TEXT_WIDTH = 0.125;
-const float TEXT_HEIGHT = 0.1875;
+const float t_TEXT_WIDTH = 0.125;
+const float t_TEXT_HEIGHT = 0.1875;
+
+const float TEXT_WIDTH = 25;
+const float TEXT_HEIGHT = 20;
 
 const int ONE_TURN_COST = 24;
 
@@ -64,8 +67,8 @@ const float ITEM_CLIP [] ={
     0.250, 0, 0.250, 0.250, //X
     0.250,0.250,0.250,0.125, //Fod
     0.5, 0, 0.375, 0.125, //Book
-    0.5,0.125,0.375, 0.250,
-    0, 0.5, 0.125,0.375 ,//player
+    0.5,0.125,0.375, 0.250, //carpet
+    0, 0.375, 0.125,0.375 ,//player
     0,125,0.5,0.125,0.375 //ghost
 };
 

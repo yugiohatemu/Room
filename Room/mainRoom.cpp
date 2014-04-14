@@ -13,6 +13,7 @@
 #include "instance.h"
 #include "item.h"
 #include "player.h"
+#include "text.h"
 
 MainRoom::MainRoom(){
     pos = Point(240, 320,0);
@@ -20,22 +21,36 @@ MainRoom::MainRoom(){
     speed_factor = 5;
     one_turn = ONE_TURN_COST;
     
-    
     //TODO: set options to be text
     Item *bed = new Item();
     bed->hitbox = Rect(Point(50,50,0),150,200);
     bed->type = ITEM_BED;
-    bed->turn_cost = 0;
+    bed->turn_cost = 7;
+    bed->mh_charge = 10;
+    bed->ph_charge = 15;
+    bed->options[0] = new Text(Point(125, 150,0),"INFO");
+    bed->options[1] = new Text(Point(125, 150 + TEXT_HEIGHT,0),"USE");
+    bed->info = new Text(Point(0, 400,0),"This is a comfortable bed");
     //yap...
     Item *X = new Item();
     X->hitbox = Rect(Point(500, 50, 0),80 ,80);
     X->type = ITEM_X;
-    X->turn_cost = 0;
+    X->turn_cost = 5;
+    X->mh_charge = -10;
+    X->ph_charge = -10;
+    X->options[0] = new Text(Point(540, 90,0),"INFO");
+    X->options[1] = new Text(Point(540, 90 + TEXT_HEIGHT,0),"USE");
+    X->info = new Text(Point(0, 400,0),"This is X");
     //
     Item *book = new Item();
     book->hitbox = Rect(Point(50, 350, 0),100 ,60);
     book->type = ITEM_BOOK;
-    book->turn_cost = 0;
+    book->turn_cost = 5;
+    book->mh_charge = 5;
+    book->ph_charge = -10;
+    book->options[0] = new Text(Point(100, 380,0),"INFO");
+    book->options[1] = new Text(Point(100, 380 + TEXT_HEIGHT,0),"USE");
+    book->info = new Text(Point(0, 400,0),"There are many books in it");
     
     //push everything into a vector...yap
     all_items.push_back(bed);
@@ -70,7 +85,7 @@ void MainRoom::render(){
         all_items[i]->render();
     }
     
-    Instance::get().bottomInfo().render();
+//    Instance::get().bottomInfo().render();
 
     glPushMatrix();
     glTranslatef(pos.x, pos.y, 0);
@@ -104,7 +119,7 @@ void MainRoom::update(SDL_Event event){
         for (unsigned int i = 0; i < all_items.size(); i++) {
             if (all_items[i]->is_item_being_hit(new_pos)) {
                 
-                if (!all_items[i]->hidden) { //note, here should be option->hidden
+                if (!all_items[i]->option_hidden) { //note, here should be option->hidden
                     
                     int option_hit = all_items[i]->get_option_being_hit(new_pos);
                     if (option_hit != -1) { //hit actually happens on option
@@ -112,14 +127,12 @@ void MainRoom::update(SDL_Event event){
                     }
                     
                     if (option_hit == 0) { //0
-                        //get info from the option in futrue
-                        Instance::get().bottomInfo().set_info("Hi\n");
-                        Instance::get().bottomInfo().hidden = false;
+                        all_items[i]->info_hidden = false;
                     }else if(option_hit == 1){ //use
-                        //TODO:
                         player->physical_health += all_items[i]->ph_charge;
                         player->mental_health += all_items[i]->mh_charge;
                         one_turn -= all_items[i]->turn_cost;
+                        std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<<one_turn<<std::endl;
                         if (one_turn <= 0) { //reset
                             one_turn = ONE_TURN_COST;
                             //reset
@@ -128,11 +141,11 @@ void MainRoom::update(SDL_Event event){
                     }
                     break;
                 }else { //close enough
-                    all_items[i]->hidden = false;
+                    all_items[i]->option_hidden = false;
                 }
             }else{
-                all_items[i]->hidden = true;
-                Instance::get().bottomInfo().hidden = true;
+                all_items[i]->option_hidden = true;
+                all_items[i]->info_hidden = true;
             }
 
         }

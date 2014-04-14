@@ -10,7 +10,6 @@
 #define __Room__instance__
 
 #include "texture.h"
-#include "bottomInfo.h"
 #include "const.h"
 class Instance{
 private:
@@ -18,13 +17,11 @@ private:
     Instance(Instance const&);             // copy constructor is private
     Instance& operator=(Instance const&);  // assignment operator is private
     Texture m_texture;
-    BottomInfo m_bottomInfo;
 public:
     static Instance& get();
     void load_all();
     void clean_all();
     Texture& texture();
-    BottomInfo& bottomInfo();
 };
 
 
