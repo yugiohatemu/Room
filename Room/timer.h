@@ -10,18 +10,15 @@
 #define __Room__timer__
 
 class Timer{
-private:
     float time_accum;
     int start_tick;
-    float count_down;
 public:
+    float count_down;
     Timer();
     Timer(float count_down);
     ~Timer();
     bool is_timeup();
-    void start();
-//    void reset();
-//    float get_accum_time();
+    void restart();
 };
 
 #endif /* defined(__Room__timer__) */

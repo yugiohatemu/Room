@@ -27,7 +27,7 @@ bool Timer::is_timeup(){
     return (time_accum >= count_down);
 }
 
-void Timer::start(){
+void Timer::restart(){
     time_accum = 0;
     start_tick = SDL_GetTicks();
 }

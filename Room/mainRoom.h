@@ -13,12 +13,14 @@
 #include <SDL2/SDL_events.h>
 #include "rect.h"
 #include <vector>
+#include "timer.h"
 
 class Player;
 class Item;
 class Text;
 
 class MainRoom{
+public:
     Point pos;
     Point next_pos;
     Vector speed;
@@ -27,7 +29,8 @@ class MainRoom{
     Player * player;
     Text * turnScreen;
     int one_turn;
-public:
+    Timer timer;
+    
     MainRoom();
     ~MainRoom();
     void render();

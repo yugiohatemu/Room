@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include <string>
 #include "mainRoom.h"
-#include "timer.h"
 #include "instance.h"
 //Minimum Screen dimension constants
 

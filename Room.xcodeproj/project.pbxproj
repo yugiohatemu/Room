@@ -22,6 +22,7 @@
 		3B63181318F483DD004A6369 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181118F483DD004A6369 /* timer.cpp */; };
 		3B63181618F49DDE004A6369 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181418F49DDE004A6369 /* rect.cpp */; };
 		3BB71C0C18FC205E00B858D0 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C0A18FC205E00B858D0 /* player.cpp */; };
+		3BB71C1418FC81CE00B858D0 /* screenController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C1218FC81CE00B858D0 /* screenController.cpp */; };
 		3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB88FFC18F5BCE900127E17 /* item.cpp */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,9 @@
 		3BB71C0918F7924900B858D0 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		3BB71C0A18FC205E00B858D0 /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		3BB71C0B18FC205E00B858D0 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
+		3BB71C1018FC813400B858D0 /* screen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screen.h; sourceTree = "<group>"; };
+		3BB71C1218FC81CE00B858D0 /* screenController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = screenController.cpp; sourceTree = "<group>"; };
+		3BB71C1318FC81CE00B858D0 /* screenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = screenController.h; sourceTree = "<group>"; };
 		3BB88FFC18F5BCE900127E17 /* item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = item.cpp; sourceTree = "<group>"; };
 		3BB88FFD18F5BCE900127E17 /* item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = item.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,9 +142,10 @@
 				3B63181218F483DD004A6369 /* timer.h */,
 				3BB71C0A18FC205E00B858D0 /* player.cpp */,
 				3BB71C0B18FC205E00B858D0 /* player.h */,
-				3B6317FC18F45C62004A6369 /* Room.1 */,
+				3BB71C1118FC817500B858D0 /* Controller */,
 				3B0C0C3F18F73B2700D13EE0 /* Instance */,
 				3BB71C0318F78AF800B858D0 /* Image */,
+				3B6317FC18F45C62004A6369 /* Room.1 */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -152,6 +157,16 @@
 				3BB71C0518F78B5F00B858D0 /* item.png */,
 			);
 			name = Image;
+			sourceTree = "<group>";
+		};
+		3BB71C1118FC817500B858D0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3BB71C1018FC813400B858D0 /* screen.h */,
+				3BB71C1218FC81CE00B858D0 /* screenController.cpp */,
+				3BB71C1318FC81CE00B858D0 /* screenController.h */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +229,7 @@
 				3B63181618F49DDE004A6369 /* rect.cpp in Sources */,
 				3BB71C0C18FC205E00B858D0 /* player.cpp in Sources */,
 				3B0C0C3D18F73B1900D13EE0 /* text.cpp in Sources */,
+				3BB71C1418FC81CE00B858D0 /* screenController.cpp in Sources */,
 				3B63181318F483DD004A6369 /* timer.cpp in Sources */,
 				3B0C0C3E18F73B1900D13EE0 /* texture.cpp in Sources */,
 			);

@@ -61,6 +61,12 @@ MainRoom::MainRoom(){
     
     player = new Player();
     player->hitbox = Rect(Point(),40,120);
+    
+    turnScreen = new Text(Point(), "Day 1\n");
+    //actually we want a underlying background box
+    //which is completely different from the box that the screen arrange the text
+    timer.count_down = 1500.0f; //or we could just add a click/enter
+    timer.restart();
 }
 
 MainRoom::~MainRoom(){
@@ -68,6 +74,7 @@ MainRoom::~MainRoom(){
         delete all_items[i];
     }
     delete player;
+    delete turnScreen;
 }
 
 void MainRoom::render(){
@@ -82,15 +89,20 @@ void MainRoom::render(){
             speed.y = 0;
         }
     }
-    
-    for (unsigned int i = 0; i < all_items.size(); i++) {
-        all_items[i]->render();
+    //deploy the screen shuffeling latter....
+    //
+    if (!timer.is_timeup()) {
+        turnScreen->render();
+    }else{
+        for (unsigned int i = 0; i < all_items.size(); i++) {
+            all_items[i]->render();
+        }
+        
+        glPushMatrix();
+        glTranslatef(pos.x, pos.y, 0);
+        player->render();
+        glPopMatrix();
     }
-
-    glPushMatrix();
-    glTranslatef(pos.x, pos.y, 0);
-    player->render();
-    glPopMatrix();
 }
 
 void MainRoom::update(SDL_Event event){
@@ -123,7 +135,7 @@ void MainRoom::update(SDL_Event event){
                     
                     int option_hit = all_items[i]->get_option_being_hit(new_pos);
                     if (option_hit != -1) { //hit actually happens on option
-                        std::cout<<"Hit option "<<option_hit<<std::endl;
+//                        std::cout<<"Hit option "<<option_hit<<std::endl;
                     }
                     
                     if (option_hit == 0) { //0
@@ -132,10 +144,11 @@ void MainRoom::update(SDL_Event event){
                         player->physical_health += all_items[i]->ph_charge;
                         player->mental_health += all_items[i]->mh_charge;
                         one_turn -= all_items[i]->turn_cost;
-                        std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<<one_turn<<std::endl;
+//                        std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<<one_turn<<std::endl;
                         if (one_turn <= 0) { //reset
                             one_turn = ONE_TURN_COST;
-                            //reset
+                            //textScreen.set_text("Stats report")
+                            timer.restart(); //we need more ...font
                         }
                         
                     }
