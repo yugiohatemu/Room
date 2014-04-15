@@ -31,7 +31,6 @@ public:
     void render();
     bool is_item_being_hit(Point pos);
     int get_option_being_hit(Point pos);
-    Vector get_closest_dir(Point pos, Vector dir);
 };
 
 #endif /* defined(__Room__item__) */

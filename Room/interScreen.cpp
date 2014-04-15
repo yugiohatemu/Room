@@ -10,7 +10,7 @@
 #include "text.h"
 #include "instance.h"
 #include "mainScreen.h" 
-#include "mainRoom.h"
+#include "room.h"
 
 InterScreen::InterScreen(){
     

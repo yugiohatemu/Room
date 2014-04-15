@@ -10,16 +10,22 @@
 #define __Room__mainScreen__
 
 #include <SDL2/SDL_events.h>
+#include <vector>
+class Room;
+class Player;
 
-class MainRoom;
 
 class MainScreen{
 public:
-    MainRoom * main_room;
+    Room * main_room;
+    Player * player;
+    std::vector<Room *> rooms;
+
     MainScreen();
     ~MainScreen();
     void render();
     void update(SDL_Event event);
+    void set_main_room(Room * room);
 };
 
 #endif /* defined(__Room__mainScreen__) */

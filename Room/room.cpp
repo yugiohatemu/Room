@@ -1,12 +1,12 @@
 //
-//  mainRoom.cpp
+//  Room.cpp
 //  Room
 //
 //  Created by Yue Huang on 2014-04-08.
 //  Copyright (c) 2014 Yue Huang. All rights reserved.
 //
 
-#include "mainRoom.h"
+#include "room.h"
 #include <OpenGL/OpenGL.h>
 #include <SDL2/SDL_opengl.h>
 #include <iostream>
@@ -16,12 +16,15 @@
 #include "player.h"
 #include "text.h"
 #include "interScreen.h"
+#include "mainScreen.h"
+#include "door.h"
 
-MainRoom::MainRoom(){
+Room::Room(){
     pos = Point(240, 320,0);
     next_pos = pos;
     speed_factor = 5;
     one_turn = ONE_TURN_COST;
+    hitbox = Rect(Point(), SCREEN_WIDTH, SCREEN_HEIGHT);
     
     Item *bed = new Item();
     bed->hitbox = Rect(Point(50,50,0),150,200);
@@ -57,20 +60,18 @@ MainRoom::MainRoom(){
     all_items.push_back(bed);
     all_items.push_back(X);
     all_items.push_back(book);
-    
-    player = new Player();
-    player->hitbox = Rect(Point(),40,120);
-    
 }
 
-MainRoom::~MainRoom(){
+Room::~Room(){
     for (unsigned int i = 0; i < all_items.size(); i++) {
         delete all_items[i];
     }
-    delete player;
+    for(unsigned int i = 0; i < doors.size();i++){
+        delete doors[i];
+    }
 }
 
-void MainRoom::reset(){
+void Room::reset(){
     pos.x = 240; pos.y = 320;
     one_turn = ONE_TURN_COST;
     next_pos = pos;
@@ -81,7 +82,7 @@ void MainRoom::reset(){
     }
 }
 
-void MainRoom::render(){
+void Room::render(){
     //Event unrelated update
     if (next_pos != pos) {
         float dis =  (next_pos - pos).get_norm();
@@ -93,32 +94,42 @@ void MainRoom::render(){
             speed.y = 0;
         }
     }
-    
+    for(unsigned int i = 0; i < doors.size();i++){
+        doors[i]->render();
+    }
     for (unsigned int i = 0; i < all_items.size(); i++) {
         all_items[i]->render();
     }
         
     glPushMatrix();
     glTranslatef(pos.x, pos.y, 0);
-    player->render();
+    if(player) player->render();
     glPopMatrix();
     
 }
 
-void MainRoom::update(SDL_Event event){
+void Room::update(SDL_Event event){
   
     if( event.type == SDL_MOUSEBUTTONDOWN ){
         
         int x, y; SDL_GetMouseState( &x, &y );
         Point new_pos(x,y,0);
-        if (next_pos == new_pos) return;
-
+        //If same or outside the room range, do nothing...
+        if (next_pos == new_pos || !hitbox.is_pos_in_rec(new_pos)) return;
+        
         Vector dir = new_pos - pos;
         float dis = dir.get_norm();
         
+        for (unsigned int i = 0; i < doors.size(); i++) {
+            if (doors[i]->hitbox.is_pos_in_rec(new_pos)) {
+                //TODO: perform animation to walk to the door
+                Instance::get().main_screen->set_main_room(doors[i]->next_room);
+                return ;
+            }
+        }
         //Get the closeset one as the real next_pos;
         for (unsigned int i = 0; i < all_items.size(); i++) {
-            Vector next_dir = all_items[i]->get_closest_dir(pos, dir);
+            Vector next_dir = all_items[i]->hitbox.get_closest_dir(pos, dir);
             float next_dis = next_dir.get_norm();
                     
             if (next_dis < dis) {

@@ -18,9 +18,10 @@
 		3B63180818F45E94004A6369 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B63180718F45E94004A6369 /* OpenGL.framework */; };
 		3B63180A18F46169004A6369 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B63180918F46169004A6369 /* GLUT.framework */; };
 		3B63180D18F470B0004A6369 /* algebra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63180B18F470B0004A6369 /* algebra.cpp */; };
-		3B63181018F47343004A6369 /* mainRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63180E18F47343004A6369 /* mainRoom.cpp */; };
+		3B63181018F47343004A6369 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63180E18F47343004A6369 /* room.cpp */; };
 		3B63181318F483DD004A6369 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181118F483DD004A6369 /* timer.cpp */; };
 		3B63181618F49DDE004A6369 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181418F49DDE004A6369 /* rect.cpp */; };
+		3BACDB9718FD7BEA008B95B7 /* door.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BACDB9518FD7BEA008B95B7 /* door.cpp */; };
 		3BB71C0C18FC205E00B858D0 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C0A18FC205E00B858D0 /* player.cpp */; };
 		3BB71C1A18FC86CF00B858D0 /* mainScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C1818FC86CF00B858D0 /* mainScreen.cpp */; };
 		3BB71C1D18FCCD5100B858D0 /* interScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C1B18FCCD5100B858D0 /* interScreen.cpp */; };
@@ -58,12 +59,14 @@
 		3B63180918F46169004A6369 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		3B63180B18F470B0004A6369 /* algebra.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = algebra.cpp; sourceTree = "<group>"; };
 		3B63180C18F470B0004A6369 /* algebra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = algebra.h; sourceTree = "<group>"; };
-		3B63180E18F47343004A6369 /* mainRoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mainRoom.cpp; sourceTree = "<group>"; };
-		3B63180F18F47343004A6369 /* mainRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainRoom.h; sourceTree = "<group>"; };
+		3B63180E18F47343004A6369 /* room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
+		3B63180F18F47343004A6369 /* room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = room.h; sourceTree = "<group>"; };
 		3B63181118F483DD004A6369 /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		3B63181218F483DD004A6369 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		3B63181418F49DDE004A6369 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 		3B63181518F49DDE004A6369 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
+		3BACDB9518FD7BEA008B95B7 /* door.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = door.cpp; sourceTree = "<group>"; };
+		3BACDB9618FD7BEA008B95B7 /* door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = door.h; sourceTree = "<group>"; };
 		3BB71C0418F78B5F00B858D0 /* fontTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fontTile.png; sourceTree = "<group>"; };
 		3BB71C0518F78B5F00B858D0 /* item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item.png; sourceTree = "<group>"; };
 		3BB71C0918F7924900B858D0 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
@@ -136,10 +139,12 @@
 				3B0C0C3618F73B1900D13EE0 /* text.cpp */,
 				3B0C0C3718F73B1900D13EE0 /* text.h */,
 				3B6317FA18F45C62004A6369 /* main.cpp */,
-				3B63180E18F47343004A6369 /* mainRoom.cpp */,
-				3B63180F18F47343004A6369 /* mainRoom.h */,
+				3B63180E18F47343004A6369 /* room.cpp */,
+				3B63180F18F47343004A6369 /* room.h */,
 				3BB88FFC18F5BCE900127E17 /* item.cpp */,
 				3BB88FFD18F5BCE900127E17 /* item.h */,
+				3BACDB9518FD7BEA008B95B7 /* door.cpp */,
+				3BACDB9618FD7BEA008B95B7 /* door.h */,
 				3B63180B18F470B0004A6369 /* algebra.cpp */,
 				3B63180C18F470B0004A6369 /* algebra.h */,
 				3B63181418F49DDE004A6369 /* rect.cpp */,
@@ -216,9 +221,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B63180D18F470B0004A6369 /* algebra.cpp in Sources */,
+				3BACDB9718FD7BEA008B95B7 /* door.cpp in Sources */,
 				3B0C0C3C18F73B1900D13EE0 /* loadPNG.cpp in Sources */,
 				3B0C0C3B18F73B1900D13EE0 /* instance.cpp in Sources */,
-				3B63181018F47343004A6369 /* mainRoom.cpp in Sources */,
+				3B63181018F47343004A6369 /* room.cpp in Sources */,
 				3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */,
 				3BB71C1A18FC86CF00B858D0 /* mainScreen.cpp in Sources */,
 				3B6317FB18F45C62004A6369 /* main.cpp in Sources */,
