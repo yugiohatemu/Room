@@ -7,9 +7,15 @@
 //
 
 #include "instance.h"
+#include "mainScreen.h"
+#include "interScreen.h"
+#include "text.h"
 
 Instance::Instance(){
-   
+    main_screen = new MainScreen();
+    inter_screen = new InterScreen();
+    inter_screen->text = new Text(Point(),"Day 1\nWhy I am here");
+    screen_shown = INTER_SCREEN;
 }
 
 Instance::Instance(Instance const&){
@@ -32,9 +38,30 @@ void Instance::load_all(){
 
 void Instance::clean_all(){
     m_texture.clean_texture();
+    delete main_screen;
+    delete inter_screen;
 }
 
 Texture& Instance::texture(){
     return m_texture;
 }
 
+void Instance::render(){
+    if(screen_shown == MAIN_SCREEN){
+        main_screen->render();
+    }else if(screen_shown == INTER_SCREEN){
+        inter_screen->render();
+    }else if(screen_shown == MENU_SCREEN){
+        
+    }
+}
+
+void Instance::update(SDL_Event event){
+    if(screen_shown == MAIN_SCREEN){
+        main_screen->update(event);
+    }else if(screen_shown == INTER_SCREEN){
+        inter_screen->update(event);
+    }else if(screen_shown == MENU_SCREEN){
+        //
+    }
+}

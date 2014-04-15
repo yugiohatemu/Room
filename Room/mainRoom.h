@@ -17,9 +17,9 @@
 
 class Player;
 class Item;
-class Text;
 
 class MainRoom{
+    
 public:
     Point pos;
     Point next_pos;
@@ -27,14 +27,14 @@ public:
     std::vector<Item *> all_items;
     float speed_factor;
     Player * player;
-    Text * turnScreen;
+    
     int one_turn;
-    Timer timer;
     
     MainRoom();
     ~MainRoom();
     void render();
     void update(SDL_Event event);
+    void reset();
 };
 
 #endif /* defined(__Room__mainRoom__) */

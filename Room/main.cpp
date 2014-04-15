@@ -12,7 +12,7 @@
 #include <GLUT/GLUT.h>
 #include <stdio.h>
 #include <string>
-#include "mainRoom.h"
+#include "mainScreen.h"
 #include "instance.h"
 //Minimum Screen dimension constants
 
@@ -67,7 +67,7 @@ int main( int argc, char* args[] ){
 		bool quit = false;
 //				SDL_StartTextInput();
         Instance::get().load_all();
-        MainRoom * main_room = new MainRoom();
+        
         //Handle events on queue
         SDL_Event event;
 		//While application is running
@@ -80,16 +80,16 @@ int main( int argc, char* args[] ){
 					quit = true;
                     break;
 				}else if(event.type == SDL_MOUSEBUTTONDOWN){
-                    main_room->update(event);
+                    Instance::get().update(event);
                     break;
                 }
 			}
             
             glClear(GL_COLOR_BUFFER_BIT);
-            main_room->render();
+            Instance::get().render();
             SDL_GL_SwapWindow( gWindow );
 		}
-        delete main_room;
+        
         Instance::get().clean_all();
 		//Disable text input SDL_StopTextInput();
 	}

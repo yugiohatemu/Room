@@ -11,6 +11,11 @@
 
 #include "texture.h"
 #include "const.h"
+#include <SDL2/SDL_events.h>
+
+class InterScreen;
+class MainScreen;
+
 class Instance{
 private:
     Instance();  // Private so that it can  not be called
@@ -18,10 +23,22 @@ private:
     Instance& operator=(Instance const&);  // assignment operator is private
     Texture m_texture;
 public:
+    enum SCREEN_SHOWN{
+        MENU_SCREEN,
+        INTER_SCREEN,
+        MAIN_SCREEN,
+    };
+    SCREEN_SHOWN screen_shown;
+    
+    InterScreen * inter_screen;
+    MainScreen * main_screen;
+    
     static Instance& get();
     void load_all();
     void clean_all();
     Texture& texture();
+    void render();
+    void update(SDL_Event event);
 };
 
 

@@ -15,7 +15,7 @@
 #include "item.h"
 #include "player.h"
 #include "text.h"
-
+#include "interScreen.h"
 
 MainRoom::MainRoom(){
     pos = Point(240, 320,0);
@@ -23,7 +23,6 @@ MainRoom::MainRoom(){
     speed_factor = 5;
     one_turn = ONE_TURN_COST;
     
-    //TODO: set options to be text
     Item *bed = new Item();
     bed->hitbox = Rect(Point(50,50,0),150,200);
     bed->type = ITEM_BED;
@@ -62,11 +61,6 @@ MainRoom::MainRoom(){
     player = new Player();
     player->hitbox = Rect(Point(),40,120);
     
-    turnScreen = new Text(Point(), "Day 1\n");
-    //actually we want a underlying background box
-    //which is completely different from the box that the screen arrange the text
-    timer.count_down = 1500.0f; //or we could just add a click/enter
-    timer.restart();
 }
 
 MainRoom::~MainRoom(){
@@ -74,7 +68,17 @@ MainRoom::~MainRoom(){
         delete all_items[i];
     }
     delete player;
-    delete turnScreen;
+}
+
+void MainRoom::reset(){
+    pos.x = 240; pos.y = 320;
+    one_turn = ONE_TURN_COST;
+    next_pos = pos;
+    
+    for(unsigned int i =0;i < all_items.size();i++){
+        all_items[i]->option_hidden = true;
+        all_items[i]->info_hidden = true;
+    }
 }
 
 void MainRoom::render(){
@@ -89,20 +93,16 @@ void MainRoom::render(){
             speed.y = 0;
         }
     }
-    //deploy the screen shuffeling latter....
-    //
-    if (!timer.is_timeup()) {
-        turnScreen->render();
-    }else{
-        for (unsigned int i = 0; i < all_items.size(); i++) {
-            all_items[i]->render();
-        }
-        
-        glPushMatrix();
-        glTranslatef(pos.x, pos.y, 0);
-        player->render();
-        glPopMatrix();
+    
+    for (unsigned int i = 0; i < all_items.size(); i++) {
+        all_items[i]->render();
     }
+        
+    glPushMatrix();
+    glTranslatef(pos.x, pos.y, 0);
+    player->render();
+    glPopMatrix();
+    
 }
 
 void MainRoom::update(SDL_Event event){
@@ -146,9 +146,9 @@ void MainRoom::update(SDL_Event event){
                         one_turn -= all_items[i]->turn_cost;
 //                        std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<<one_turn<<std::endl;
                         if (one_turn <= 0) { //reset
-                            one_turn = ONE_TURN_COST;
-                            //textScreen.set_text("Stats report")
-                            timer.restart(); //we need more ...font
+                            Instance::get().screen_shown = Instance::INTER_SCREEN;
+                            Instance::get().inter_screen->text->set_text("Next Day");
+                            //TODO: set the text on Inter screen
                         }
                         
                     }
