@@ -24,7 +24,6 @@ public:
     ~MainScreen();
     void render();
     void update(SDL_Event event);
-    void set_main_room(Room * room);
     void turn_end();
 };
 

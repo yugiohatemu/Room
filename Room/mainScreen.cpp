@@ -20,8 +20,8 @@ MainScreen::MainScreen(){
     //Central memory control of room and door
     Room * root_room = new Room();
     rooms.push_back(root_room);
-    set_main_room(root_room);
-    
+    main_room = root_room;
+    main_room->player = player;
     
     //Create main room here
     Item *bed = new Item();
@@ -67,11 +67,6 @@ MainScreen::~MainScreen(){
     delete player;
 }
 
-void MainScreen::set_main_room(Room * room){
-    main_room = room;
-    main_room->player = player;
-}
-
 void MainScreen::render(){
     main_room->render();
 }
@@ -99,8 +94,9 @@ void MainScreen::turn_end(){
         new_room->all_items.push_back(book);
         
         Room * prev_room = rooms[rooms.size()-1];
-        Door * d1 = new Door(); d1->hitbox = Rect(Point(320,50,0),30,40);
-        Door * d2 = new Door(); d2->hitbox = Rect(Point(320,400,0),30,40);
+        
+        Door * d1 = new Door(Door::get_rand_dir()); //pick a direction, and find the matching direction with it
+        Door * d2 = new Door(d1->get_opp_dir());
         
         new_room->doors.push_back(d1); d1->next_room = prev_room;
         prev_room->doors.push_back(d2); d2->next_room = new_room;
@@ -140,7 +136,6 @@ void MainScreen::turn_end(){
     //Go back to our room room
     main_room = rooms[0];
     main_room->player = player;
-    
     player->turn_left = ONE_TURN_COST;
 }
 

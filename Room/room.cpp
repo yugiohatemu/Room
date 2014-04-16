@@ -98,7 +98,9 @@ void Room::update(SDL_Event event){
         for (unsigned int i = 0; i < doors.size(); i++) {
             if (doors[i]->hitbox.is_pos_in_rec(new_pos)) {
                 //TODO: perform animation to walk to the door
-                Instance::get().main_screen->set_main_room(doors[i]->next_room);
+                //Or treat it as an item first
+                Instance::get().main_screen->main_room = doors[i]->next_room;
+                doors[i]->next_room->player = player;
                 return ;
             }
         }

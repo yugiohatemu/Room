@@ -14,9 +14,20 @@ class Room;
 //could be subclassed of item
 class Door{
 public:
+    enum DOOR_DIR{
+        NORTH,
+        SOUTH,
+        WEST,
+        EAST,
+        UP, //TODO: later
+        DOWN,
+    };
     Rect hitbox;
     Room * next_room;
-    Door();
+    DOOR_DIR dir;
+    Door(DOOR_DIR dir);
+    static DOOR_DIR get_rand_dir();
+    DOOR_DIR get_opp_dir();
     ~Door();
     void render();
 };
