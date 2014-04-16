@@ -29,6 +29,6 @@ void InterScreen::update(SDL_Event event){
     //if we get a click, or space, then update?
     if( event.type == SDL_MOUSEBUTTONDOWN ){
         Instance::get().screen_shown = Instance::MAIN_SCREEN;
-        Instance::get().main_screen->main_room->reset();
+//        Instance::get().main_screen->main_room->reset();
     }
 }

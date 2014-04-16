@@ -17,10 +17,33 @@ Player::Player(){
     physical_health = 100;
     mental_health = 100;
     progress_of_x = 0;
+    
+    ph_condition[0] = 90;
+    ph_condition[1] = 80;
+    ph_condition[2] = 70;
+    
+    ph_index = 0;
+    
+    turn_left = ONE_TURN_COST;
 }
 
 Player::~Player(){
     
+}
+
+Player::Event Player::get_new_condtion(){
+    if (physical_health < ph_condition[ph_index]) {
+        if (ph_index < 3) {
+            ph_index++;
+            return CREATE_ROOM; //do something
+        }
+    }else if(physical_health > ph_condition[ph_index]){
+        if (ph_index > 0) {
+            ph_index--;
+            return DESTROY_ROOM;//destroy the newly created room
+        }
+    }
+    return DO_NOTHING; //do nothing
 }
 
 void Player::render(){

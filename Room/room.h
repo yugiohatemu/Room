@@ -18,6 +18,7 @@
 class Player;
 class Item;
 class Door;
+
 class Room{
     
 public:
@@ -29,8 +30,8 @@ public:
     float speed_factor;
     Player * player;
     Rect hitbox;
-    int one_turn;
-    
+
+    unsigned int tag;
     Room();
     ~Room();
     void render();

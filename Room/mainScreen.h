@@ -14,18 +14,18 @@
 class Room;
 class Player;
 
-
 class MainScreen{
 public:
     Room * main_room;
     Player * player;
     std::vector<Room *> rooms;
-
+    
     MainScreen();
     ~MainScreen();
     void render();
     void update(SDL_Event event);
     void set_main_room(Room * room);
+    void turn_end();
 };
 
 #endif /* defined(__Room__mainScreen__) */

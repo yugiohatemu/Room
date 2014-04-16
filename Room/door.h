@@ -11,7 +11,7 @@
 
 #include "rect.h"
 class Room;
-
+//could be subclassed of item
 class Door{
 public:
     Rect hitbox;

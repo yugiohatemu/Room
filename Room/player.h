@@ -20,8 +20,19 @@ public:
     unsigned int type;
     int physical_health;
     int mental_health;
-    int progress_of_x; //can only be increased by x
-    //more importantly is that we define the stats
+    int progress_of_x;
+    
+    int ph_condition[3];
+    int ph_index;
+    
+    enum Event{
+        DO_NOTHING,
+        CREATE_ROOM,
+        DESTROY_ROOM,
+    };
+    
+    Event get_new_condtion();
+    int turn_left;
 };
 
 #endif /* defined(__Room__player__) */
