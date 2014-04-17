@@ -21,6 +21,7 @@
 		3B63181018F47343004A6369 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63180E18F47343004A6369 /* room.cpp */; };
 		3B63181318F483DD004A6369 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181118F483DD004A6369 /* timer.cpp */; };
 		3B63181618F49DDE004A6369 /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B63181418F49DDE004A6369 /* rect.cpp */; };
+		3B9F30E119000D520087EDA3 /* ghost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F30DF19000D520087EDA3 /* ghost.cpp */; };
 		3BACDB9718FD7BEA008B95B7 /* door.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BACDB9518FD7BEA008B95B7 /* door.cpp */; };
 		3BB71C0C18FC205E00B858D0 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C0A18FC205E00B858D0 /* player.cpp */; };
 		3BB71C1A18FC86CF00B858D0 /* mainScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BB71C1818FC86CF00B858D0 /* mainScreen.cpp */; };
@@ -65,6 +66,8 @@
 		3B63181218F483DD004A6369 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		3B63181418F49DDE004A6369 /* rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 		3B63181518F49DDE004A6369 /* rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
+		3B9F30DF19000D520087EDA3 /* ghost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ghost.cpp; sourceTree = "<group>"; };
+		3B9F30E019000D520087EDA3 /* ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ghost.h; sourceTree = "<group>"; };
 		3BACDB9518FD7BEA008B95B7 /* door.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = door.cpp; sourceTree = "<group>"; };
 		3BACDB9618FD7BEA008B95B7 /* door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = door.h; sourceTree = "<group>"; };
 		3BB71C0418F78B5F00B858D0 /* fontTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fontTile.png; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				3B63180F18F47343004A6369 /* room.h */,
 				3BB88FFC18F5BCE900127E17 /* item.cpp */,
 				3BB88FFD18F5BCE900127E17 /* item.h */,
+				3B9F30DF19000D520087EDA3 /* ghost.cpp */,
+				3B9F30E019000D520087EDA3 /* ghost.h */,
 				3BACDB9518FD7BEA008B95B7 /* door.cpp */,
 				3BACDB9618FD7BEA008B95B7 /* door.h */,
 				3B63180B18F470B0004A6369 /* algebra.cpp */,
@@ -224,6 +229,7 @@
 				3BACDB9718FD7BEA008B95B7 /* door.cpp in Sources */,
 				3B0C0C3C18F73B1900D13EE0 /* loadPNG.cpp in Sources */,
 				3B0C0C3B18F73B1900D13EE0 /* instance.cpp in Sources */,
+				3B9F30E119000D520087EDA3 /* ghost.cpp in Sources */,
 				3B63181018F47343004A6369 /* room.cpp in Sources */,
 				3BB88FFE18F5BCE900127E17 /* item.cpp in Sources */,
 				3BB71C1A18FC86CF00B858D0 /* mainScreen.cpp in Sources */,

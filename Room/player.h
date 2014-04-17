@@ -9,7 +9,7 @@
 #ifndef __Room__player__
 #define __Room__player__
 #include "rect.h"
-
+class Ghost;
 class Player{
 public:
     Player();
@@ -21,7 +21,7 @@ public:
     int physical_health;
     int mental_health;
     int progress_of_x;
-    
+
     int ph_condition[3];
     int ph_index;
     
@@ -33,6 +33,7 @@ public:
     
     Event get_new_condtion();
     int turn_left;
+    Ghost * test_ghost;
 };
 
 #endif /* defined(__Room__player__) */

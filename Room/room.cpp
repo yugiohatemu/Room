@@ -18,7 +18,7 @@
 #include "interScreen.h"
 #include "mainScreen.h"
 #include "door.h"
-
+#include "ghost.h"
 unsigned int tag_conunter = 0;
 
 Room::Room(){
@@ -81,6 +81,7 @@ void Room::render(){
     if(player) player->render();
     glPopMatrix();
     
+    player->test_ghost->render();
 }
 
 void Room::update(SDL_Event event){
@@ -155,6 +156,7 @@ void Room::update(SDL_Event event){
         }
         
         next_pos = pos + dir;
+        player->test_ghost->follow(next_pos);
         dir.normalize();
         speed = dir * speed_factor;
         
