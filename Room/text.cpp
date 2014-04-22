@@ -73,14 +73,20 @@ void Text::render(){
             i = 0;
             j++;
         }else{
-            if (isalpha(s[counter])) {
-                unsigned int c = toupper(s[counter]) - 'A';
-                
-                glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1]); glVertex2f( top.x + i * text_width, top.y + j * text_height );
-                glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1]); glVertex2f( top.x +(i+1) * text_width, top.y + j * text_height );
-                glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +(i+1) * text_width, top.y + (j+1) * text_height );
-                glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +i * text_width, top.y + (j+1) * text_height );
-            }
+            unsigned int c = 0;
+            if (isalpha(s[counter])) c = toupper(s[counter]) - 'A';
+            else if (isdigit(s[counter]))c = s[counter] - '0' + 26;
+            //. , ? ! :
+            else if(s[counter] == '.') c = 36;
+            else if(s[counter] == ',') c = 37;
+            else if(s[counter] == '?') c = 38;
+            else if(s[counter] == '!') c = 39;
+            else if(s[counter] == ':') c = 40;
+        
+            glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1]); glVertex2f( top.x + i * text_width, top.y + j * text_height );
+            glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1]); glVertex2f( top.x +(i+1) * text_width, top.y + j * text_height );
+            glTexCoord2f(TEXT_CLIP[2*c] + t_TEXT_WIDTH, TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +(i+1) * text_width, top.y + (j+1) * text_height );
+            glTexCoord2f(TEXT_CLIP[2*c], TEXT_CLIP[2*c + 1] + t_TEXT_HEIGHT);glVertex2f( top.x +i * text_width, top.y + (j+1) * text_height );
             i++;
         }
     }

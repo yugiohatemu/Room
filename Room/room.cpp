@@ -133,11 +133,11 @@ void Room::update(SDL_Event event){
                         player->physical_health += all_items[i]->ph_charge;
                         player->mental_health += all_items[i]->mh_charge;
                         player->turn_left -= all_items[i]->turn_cost;
+                        //Record which item is used
+                        //It is still a event and condition driven thing
+                        
                         std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<< player->turn_left<<std::endl;
                         if (player->turn_left  <= 0) { //reset
-                            
-                            Instance::get().screen_shown = Instance::INTER_SCREEN;
-                            Instance::get().inter_screen->text->set_text("Next Day");
                             Instance::get().main_screen->turn_end();
                             return ;
 

@@ -65,7 +65,6 @@ int main( int argc, char* args[] ){
 	else{
 		//Main loop flag
 		bool quit = false;
-//				SDL_StartTextInput();
         Instance::get().load_all();
         
         //Handle events on queue
@@ -79,7 +78,7 @@ int main( int argc, char* args[] ){
 				if( event.type == SDL_QUIT ){
 					quit = true;
                     break;
-				}else if(event.type == SDL_MOUSEBUTTONDOWN){
+				}else if(event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_KEYDOWN){
                     Instance::get().update(event);
                     break;
                 }
@@ -91,7 +90,6 @@ int main( int argc, char* args[] ){
 		}
         
         Instance::get().clean_all();
-		//Disable text input SDL_StopTextInput();
 	}
     
 	//Close and free

@@ -13,6 +13,7 @@
 #include <vector>
 class Room;
 class Player;
+class Text;
 
 class MainScreen{
 public:
@@ -25,6 +26,9 @@ public:
     void render();
     void update(SDL_Event event);
     void turn_end();
+    
+    bool show_health;
+    Text * health_screen;
 };
 
 #endif /* defined(__Room__mainScreen__) */

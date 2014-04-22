@@ -10,6 +10,8 @@
 #define __Room__item__
 
 #include "rect.h"
+#include <string>
+
 class Text;
 
 class Item{
@@ -31,6 +33,7 @@ public:
     void render();
     bool is_item_being_hit(Point pos);
     int get_option_being_hit(Point pos);
+//    std::string event;
 };
 
 #endif /* defined(__Room__item__) */

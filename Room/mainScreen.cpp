@@ -13,15 +13,19 @@
 #include "item.h"
 #include "instance.h"
 #include "text.h"
+#include "interScreen.h"
+#include <sstream>
 
 MainScreen::MainScreen(){
     player = new Player();
     player->hitbox = Rect(Point(),40,120);
+    show_health = false;
     //Central memory control of room and door
     Room * root_room = new Room();
     rooms.push_back(root_room);
     main_room = root_room;
     main_room->player = player;
+    health_screen = new Text(Point(320, 200,0), "HP:  \nMP:  \nX:  ");
     
     //Create main room here
     Item *bed = new Item();
@@ -33,6 +37,7 @@ MainScreen::MainScreen(){
     bed->options[0] = new Text(Point(125, 150,0),"INFO");
     bed->options[1] = new Text(Point(125, 150 + TEXT_HEIGHT,0),"USE");
     bed->info = new Text(Point(0, 400,0),"This is a comfortable bed");
+//    bed->event = "I slept.\n"; //good? bad? average? Had dreams?
     //yap...
     Item *X = new Item();
     X->hitbox = Rect(Point(500, 50, 0),80 ,80);
@@ -43,6 +48,7 @@ MainScreen::MainScreen(){
     X->options[0] = new Text(Point(540, 90,0),"INFO");
     X->options[1] = new Text(Point(540, 90 + TEXT_HEIGHT,0),"USE");
     X->info = new Text(Point(0, 400,0),"This is X");
+//    X->event = "I did X\n";//If goes well? not well? bad? stuck?
     //
     Item *book = new Item();
     book->hitbox = Rect(Point(50, 350, 0),100 ,60);
@@ -53,6 +59,8 @@ MainScreen::MainScreen(){
     book->options[0] = new Text(Point(100, 380,0),"INFO");
     book->options[1] = new Text(Point(100, 380 + TEXT_HEIGHT,0),"USE");
     book->info = new Text(Point(0, 400,0),"There are many books in it");
+//    book->event = "I read books\n"; //it inspired me? depress me? or what?
+    //Or may be we could just record item_type? and form string latter?
     
     root_room->all_items.push_back(bed);
     root_room->all_items.push_back(X);
@@ -69,17 +77,29 @@ MainScreen::~MainScreen(){
 
 void MainScreen::render(){
     main_room->render();
+    if (show_health) {
+        //health_screen->set_text_with_player_stat();
+        health_screen->render();
+    }
 }
 
 void MainScreen::update(SDL_Event event){
+    if (event.type == SDL_KEYDOWN){
+        if(event.key.keysym.sym == SDLK_ESCAPE) show_health = !show_health ;
+    }
     main_room->update(event);
 }
 
 void MainScreen::turn_end(){
-
+    Instance::get().screen_shown = Instance::INTER_SCREEN;
+    //Dialogue pool?
+    std::stringstream ss; ss<<"Day ?"<<std::endl;
+    //There should be normal text
+    //But there should also be text driven by event
+    Instance::get().inter_screen->text->set_text("Day ?");
+    
     if(player->get_new_condtion() == Player::CREATE_ROOM){
-        //Create next room
-        //Create door to next room
+       
         Room * new_room = new Room();
         //In the latter, we can pull a random item outside of our item pool and charge it
         Item *book = new Item();
@@ -103,14 +123,11 @@ void MainScreen::turn_end(){
         
         rooms.push_back(new_room);
     }else if(player->get_new_condtion() == Player::DESTROY_ROOM){
-       //Currently just choose the last room
-        //But we can also choose the other child room latter
+#warning NOT TESTED
         unsigned int max_tag = 0;
         unsigned int index = 0;
         for (unsigned int i = 0; i < rooms.size(); i++){
-            if (rooms[i]->tag > max_tag) {
-                index = i;
-            }
+            if (rooms[i]->tag > max_tag) index = i;
         }
         Room * bad_room = rooms[index]; rooms.erase(rooms.begin() + index);
         //just pick the 1st door
@@ -137,5 +154,6 @@ void MainScreen::turn_end(){
     main_room = rooms[0];
     main_room->player = player;
     player->turn_left = ONE_TURN_COST;
+    show_health = false;
 }
 
