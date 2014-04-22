@@ -37,6 +37,15 @@ public:
     void render();
     void update(SDL_Event event);
     void reset();
+    
+    enum ROOM_TYPE{
+        EMPTY_ROOM,
+        BED_ROOM,
+        KITCHEN,
+        BOOK_ROOM
+    };
+    ROOM_TYPE room_type;
+    void set_item_in_room(ROOM_TYPE room_type);
 };
 
 #endif /* defined(__Room__Room__) */

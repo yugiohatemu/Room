@@ -16,14 +16,21 @@ Door::Door(Door::DOOR_DIR dir):dir(dir){
     hitbox.width = 30;
     hitbox.height = 40;
     //should based on the size of room latter.
+    rand_pos();
+}
+
+void Door::rand_pos(){
+    int x = std::rand() % (SCREEN_WIDTH /3) + SCREEN_WIDTH / 3;
+    int y = std::rand() % (SCREEN_HEIGHT/3) + SCREEN_HEIGHT / 3;
+    
     if (dir == NORTH) {
-        hitbox.top_left = Point(SCREEN_WIDTH/2,0,0);
+        hitbox.top_left = Point(x,0,0);
     }else if(dir == SOUTH){
-        hitbox.top_left = Point(SCREEN_WIDTH/2,SCREEN_HEIGHT - hitbox.height - 10,0);
+        hitbox.top_left = Point(x,SCREEN_HEIGHT - hitbox.height - 10,0);
     }else if(dir == WEST){
-        hitbox.top_left = Point(0,SCREEN_HEIGHT/2,0);
+        hitbox.top_left = Point(0,y,0);
     }else if(dir == EAST){
-        hitbox.top_left = Point(SCREEN_WIDTH-hitbox.width - 10, SCREEN_HEIGHT/2,0);
+        hitbox.top_left = Point(SCREEN_WIDTH-hitbox.width - 10, y,0);
     }
 }
 

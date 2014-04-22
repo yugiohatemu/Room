@@ -30,6 +30,7 @@ public:
     DOOR_DIR get_opp_dir();
     ~Door();
     void render();
+    void rand_pos();
 };
 
 #endif /* defined(__Room__door__) */

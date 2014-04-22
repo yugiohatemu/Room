@@ -33,6 +33,39 @@ Room::Room(){
     std::cout<<"Create Room "<<tag<<std::endl;
     
     player = NULL;
+    // TODO: test create item for special room
+}
+
+void Room::set_item_in_room(ROOM_TYPE r_type){
+    room_type = r_type;
+    
+    if (room_type == BED_ROOM) {
+        Item *bed = new Item();
+        bed->hitbox = Rect(Point(50,50,0),150,200);
+        bed->type = ITEM_BED;
+        bed->turn_cost = 7;
+        bed->mh_charge = 10;
+        bed->ph_charge = 15;
+        bed->options[0] = new Text(Point(125, 150,0),"INFO");
+        bed->options[1] = new Text(Point(125, 150 + TEXT_HEIGHT,0),"USE");
+        bed->info = new Text(Point(0, 400,0),"This is a comfortable bed");
+        all_items.push_back(bed);
+    }else if(room_type == KITCHEN){
+        //
+//        Item * food = new Item();
+//        all_items.push_back(food);
+    }else if(room_type == BOOK_ROOM){
+        Item *book = new Item();
+        book->hitbox = Rect(Point(50, 350, 0),100 ,60);
+        book->type = ITEM_BOOK;
+        book->turn_cost = 5;
+        book->mh_charge = 5;
+        book->ph_charge = -10;
+        book->options[0] = new Text(Point(100, 380,0),"INFO");
+        book->options[1] = new Text(Point(100, 380 + TEXT_HEIGHT,0),"USE");
+        book->info = new Text(Point(0, 400,0),"There are many books in it");
+        all_items.push_back(book);
+    }
 }
 
 Room::~Room(){
@@ -146,7 +179,7 @@ void Room::update(SDL_Event event){
                         Instance::get().main_screen->turn_left->set_text(ss.str());
                         
 //                        std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<< player->turn_left<<std::endl;
-                        if (player->turn_left  <= 0) { //reset
+                        if (player->turn_left  <= 0 || all_items[i]->type == ITEM_BED) { //reset
                             Instance::get().main_screen->turn_end();
                             return ;
 

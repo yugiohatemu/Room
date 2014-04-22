@@ -22,7 +22,6 @@ void Rect::render(){
     //3 2
     glColor3f(1, 1, 1);
     glBegin(GL_LINE_LOOP);
-//    glBegin(GL_QUADS);
     glVertex2f(top_left.x, top_left.y);
     glVertex2f(top_left.x + width, top_left.y);
     glVertex2f(top_left.x + width, top_left.y + height);
@@ -32,6 +31,14 @@ void Rect::render(){
 
 bool Rect::is_pos_in_rec(Point pos){
     return (pos.x >= top_left.x && pos.x <= top_left.x + width && pos.y >= top_left.y && pos.y <= top_left.y + height);
+}
+
+bool Rect::is_rect_overlap(Rect r){
+    if (r.is_pos_in_rec(top_left)) return true;
+    else if (r.is_pos_in_rec(Point(top_left.x + width, top_left.y,0))) return true;
+    else if (r.is_pos_in_rec(Point(top_left.x + width, top_left.y + height,0))) return true;
+    else if (r.is_pos_in_rec(Point(top_left.x, top_left.y + height,0))) return true;
+    return false;
 }
 
 Vector Rect::get_closest_dir(Point pos, Vector dir){

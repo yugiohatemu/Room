@@ -19,56 +19,21 @@
 MainScreen::MainScreen(){
     player = new Player();
     player->hitbox = Rect(Point(),40,120);
-
-    //Central memory control of room and door
-    Room * root_room = new Room();
-    rooms.push_back(root_room);
-    main_room = root_room;
-    main_room->player = player;
-    
-    //Create main room here
-    Item *bed = new Item();
-    bed->hitbox = Rect(Point(50,50,0),150,200);
-    bed->type = ITEM_BED;
-    bed->turn_cost = 7;
-    bed->mh_charge = 10;
-    bed->ph_charge = 15;
-    bed->options[0] = new Text(Point(125, 150,0),"INFO");
-    bed->options[1] = new Text(Point(125, 150 + TEXT_HEIGHT,0),"USE");
-    bed->info = new Text(Point(0, 400,0),"This is a comfortable bed");
-//    bed->event = "I slept.\n"; //good? bad? average? Had dreams?
-    //yap...
-    Item *X = new Item();
-    X->hitbox = Rect(Point(500, 50, 0),80 ,80);
-    X->type = ITEM_X;
-    X->turn_cost = 5;
-    X->mh_charge = -10;
-    X->ph_charge = -10;
-    X->options[0] = new Text(Point(540, 90,0),"INFO");
-    X->options[1] = new Text(Point(540, 90 + TEXT_HEIGHT,0),"USE");
-    X->info = new Text(Point(0, 400,0),"This is X");
-//    X->event = "I did X\n";//If goes well? not well? bad? stuck?
-    //
-    Item *book = new Item();
-    book->hitbox = Rect(Point(50, 350, 0),100 ,60);
-    book->type = ITEM_BOOK;
-    book->turn_cost = 5;
-    book->mh_charge = 5;
-    book->ph_charge = -10;
-    book->options[0] = new Text(Point(100, 380,0),"INFO");
-    book->options[1] = new Text(Point(100, 380 + TEXT_HEIGHT,0),"USE");
-    book->info = new Text(Point(0, 400,0),"There are many books in it");
-//    book->event = "I read books\n"; //it inspired me? depress me? or what?
-    //Or may be we could just record item_type? and form string latter?
-    
-    root_room->all_items.push_back(bed);
-    root_room->all_items.push_back(X);
-    root_room->all_items.push_back(book);
     
     ph = new Text(Point(), "PH: 100");
     mh = new Text(Point(300,0,0), "MH: 100");
     turn_left = new Text(Point(500,0,0), "TL: 24");
-   
+    srand(time(NULL));
+    unsigned int start_room_size = 5;
+    for (unsigned int i = 0; i < start_room_size; i++) make_room();
+    
+    //the 1st and last is always fixed here
+    rooms.front()->set_item_in_room(Room::BED_ROOM);
+    rooms.back()->set_item_in_room(Room::BOOK_ROOM);
+    
+    //set it
+    main_room = rooms.front();
+    main_room->player = player;
 }
 
 MainScreen::~MainScreen(){
@@ -91,7 +56,56 @@ void MainScreen::render(){
 
 void MainScreen::update(SDL_Event event){
     main_room->update(event);
-   
+}
+
+void MainScreen::make_room(){
+    //If starting with nothing
+    if (rooms.empty()) {
+        rooms.push_back(new Room());
+        return ;
+    }
+    
+    //eLse
+    //select a random room
+    Room * selected_room = rooms[rand() % rooms.size()];
+    //pick a direction, and find the matching direction with it
+    Door * d1 = new Door(Door::get_rand_dir());
+    //get position on the part and check against other door (if we have that might intersect it)
+    //so nasty here
+    do {
+        bool flag = true;
+        for (unsigned int i = 0; i < selected_room->doors.size(); i++) {
+            if (d1->hitbox.is_rect_overlap(selected_room->doors[i]->hitbox)) {
+                flag = false;
+                break;
+            }
+        }
+        if (!flag) {
+            d1->rand_pos();
+        }else{
+            break;
+        }
+    } while (true);
+//    while (flag) {
+//        flag = true;
+//        for (unsigned int i = 0; i < selected_room->doors.size(); i++) {
+//            if (d1->hitbox.is_rect_overlap(selected_room->doors[i]->hitbox)) {
+//                flag = false;
+//                break;
+//            }
+//        }
+//        if (!flag) {
+//            d1->rand_pos();
+//        }
+//    }
+    //create the matching door
+    Door * d2 = new Door(d1->get_opp_dir());
+    Room * new_room = new Room();
+    
+    new_room->doors.push_back(d1); d1->next_room = selected_room;
+    selected_room->doors.push_back(d2); d2->next_room = new_room;
+    
+    rooms.push_back(new_room);
 }
 
 void MainScreen::turn_end(){
@@ -103,29 +117,7 @@ void MainScreen::turn_end(){
     Instance::get().inter_screen->text->set_text("Day ?");
     
     if(player->get_new_condtion() == Player::CREATE_ROOM){
-       
-        Room * new_room = new Room();
-        //In the latter, we can pull a random item outside of our item pool and charge it
-        Item *book = new Item();
-        book->hitbox = Rect(Point(50, 350, 0),100 ,60);
-        book->type = ITEM_BOOK;
-        book->turn_cost = 5;
-        book->mh_charge = 5;
-        book->ph_charge = -10;
-        book->options[0] = new Text(Point(100, 380,0),"INFO");
-        book->options[1] = new Text(Point(100, 380 + TEXT_HEIGHT,0),"USE");
-        book->info = new Text(Point(0, 400,0),"There are many books in it");
-        new_room->all_items.push_back(book);
         
-        Room * prev_room = rooms[rooms.size()-1];
-        
-        Door * d1 = new Door(Door::get_rand_dir()); //pick a direction, and find the matching direction with it
-        Door * d2 = new Door(d1->get_opp_dir());
-        
-        new_room->doors.push_back(d1); d1->next_room = prev_room;
-        prev_room->doors.push_back(d2); d2->next_room = new_room;
-        
-        rooms.push_back(new_room);
     }else if(player->get_new_condtion() == Player::DESTROY_ROOM){
 #warning NOT TESTED
         unsigned int max_tag = 0;
@@ -140,7 +132,7 @@ void MainScreen::turn_end(){
         
         for (unsigned int i = 0; i < next_room->doors.size(); i++) {
             if (next_room->doors[i]->next_room == bad_room) {
-                 Door * d2 = next_room->doors[i];
+                Door * d2 = next_room->doors[i];
                 next_room->doors.erase(next_room->doors.begin() + i);
                 delete d2;
                 break;
@@ -153,6 +145,7 @@ void MainScreen::turn_end(){
     for (unsigned int i =0 ; i < rooms.size(); i++) {
         rooms[i]->reset();
     }
+    //TODO: spawn x in to the room
     
     //Go back to our room room
     main_room = rooms[0];

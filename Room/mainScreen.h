@@ -30,6 +30,7 @@ public:
     Text * ph;
     Text * mh;
     Text * turn_left;
+    void make_room();
 };
 
 #endif /* defined(__Room__mainScreen__) */

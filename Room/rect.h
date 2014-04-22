@@ -20,6 +20,7 @@ struct Rect{
     bool is_pos_in_rec(Point pos);
     void render();
     Vector get_closest_dir(Point pos, Vector dir);
+    bool is_rect_overlap(Rect r);
 };
 
 #endif /* defined(__Room__rect__) */
