@@ -14,7 +14,7 @@
 Instance::Instance(){
     main_screen = new MainScreen();
     inter_screen = new InterScreen();
-    inter_screen->text = new Text(Point(),"I wake up in a room.\nAll I remember is that I need to finish\n it in 30 days. \nOtherwise…");
+    inter_screen->text = new Text(Point(),"I wake up in a room.\nI need to go out."); //"I wake up in a room.\nI dont ."
     screen_shown = INTER_SCREEN;
 }
 

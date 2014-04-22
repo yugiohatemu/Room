@@ -70,7 +70,6 @@
 		3B9F30E019000D520087EDA3 /* ghost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ghost.h; sourceTree = "<group>"; };
 		3BACDB9518FD7BEA008B95B7 /* door.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = door.cpp; sourceTree = "<group>"; };
 		3BACDB9618FD7BEA008B95B7 /* door.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = door.h; sourceTree = "<group>"; };
-		3BB71C0418F78B5F00B858D0 /* fontTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fontTile.png; sourceTree = "<group>"; };
 		3BB71C0518F78B5F00B858D0 /* item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item.png; sourceTree = "<group>"; };
 		3BB71C0918F7924900B858D0 /* const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = const.h; sourceTree = "<group>"; };
 		3BB71C0A18FC205E00B858D0 /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
@@ -168,7 +167,6 @@
 		3BB71C0318F78AF800B858D0 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				3BB71C0418F78B5F00B858D0 /* fontTile.png */,
 				3BB71C0518F78B5F00B858D0 /* item.png */,
 			);
 			name = Image;
