@@ -28,11 +28,14 @@ public:
     int mh_charge; //also each item has a turn cost
     int turn_cost;
     
-    Item();
+    Item(bool lazy);
+    
     ~Item();
     void render();
     bool is_item_being_hit(Point pos);
     int get_option_being_hit(Point pos);
+    std::string item_name;
+    bool lazy;
 //    std::string event;
 };
 

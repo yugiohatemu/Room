@@ -40,7 +40,7 @@ void Room::set_item_in_room(ROOM_TYPE r_type){
     room_type = r_type;
     
     if (room_type == BED_ROOM) {
-        Item *bed = new Item();
+        Item *bed = new Item(false);
         bed->hitbox = Rect(Point(50,50,0),150,200);
         bed->type = ITEM_BED;
         bed->turn_cost = 7;
@@ -55,7 +55,7 @@ void Room::set_item_in_room(ROOM_TYPE r_type){
 //        Item * food = new Item();
 //        all_items.push_back(food);
     }else if(room_type == BOOK_ROOM){
-        Item *book = new Item();
+        Item *book = new Item(false);
         book->hitbox = Rect(Point(50, 350, 0),100 ,60);
         book->type = ITEM_BOOK;
         book->turn_cost = 5;
@@ -162,31 +162,36 @@ void Room::update(SDL_Event event){
                     
                     if (option_hit == 0) { //0
                         all_items[i]->info_hidden = false;
-                    }else if(option_hit == 1){ //use
+                    }else if(option_hit == 1){ //use or like if option_hit == USE
                         player->physical_health += all_items[i]->ph_charge;
                         player->mental_health += all_items[i]->mh_charge;
                         player->turn_left -= all_items[i]->turn_cost;
+
+                        {   //update text
+                            std::stringstream ss; ss<<"PH: "<<player->physical_health;
+                            Instance::get().main_screen->ph->set_text(ss.str());
+                            ss.str("");
                         
-                        //update text
-                        std::stringstream ss; ss<<"PH: "<<player->physical_health;
-                        Instance::get().main_screen->ph->set_text(ss.str());
-                        ss.str("");ss.clear();
+                            ss<<"MH: "<<player->mental_health;
+                            Instance::get().main_screen->mh->set_text(ss.str());
+                            ss.str("");
+                            
+                            ss<<"TL: "<<player->turn_left;
+                            Instance::get().main_screen->turn_left->set_text(ss.str());
+                        }
                         
-                        ss<<"MH: "<<player->mental_health;
-                        Instance::get().main_screen->mh->set_text(ss.str());
-                        ss.str(""); ss.clear();
-                        ss<<"TL: "<<player->turn_left;
-                        Instance::get().main_screen->turn_left->set_text(ss.str());
-                        
-//                        std::cout<<"Ph -  "<<player->physical_health<<" mh - "<<player->mental_health<<" turn left "<< player->turn_left<<std::endl;
                         if (player->turn_left  <= 0 || all_items[i]->type == ITEM_BED) { //reset
                             Instance::get().main_screen->turn_end();
                             return ;
-
                         }
                         
+                    }else if(false){ //option_hit == PICK UP
+                        //TODO:
                     }
+                    
+                    dir = Vector();
                     break;
+                    
                 }else { //close enough
                     all_items[i]->option_hidden = false;
                 }

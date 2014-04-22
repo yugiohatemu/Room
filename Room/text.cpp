@@ -54,8 +54,9 @@ Text::~Text(){
 
 void Text::render(){
     glPushMatrix();
-    hitbox.render();
     glColor4f(1, 1, 1, 0.5);
+    hitbox.render();
+    glColor3f(0, 0, 0);
     //split based on \n
     unsigned int j = 0;
 

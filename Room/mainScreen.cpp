@@ -34,6 +34,15 @@ MainScreen::MainScreen(){
     //set it
     main_room = rooms.front();
     main_room->player = player;
+    
+    Item * x = new Item(true);
+    x->item_name = "XX";
+    x->hitbox = Rect(Point(400,300,0),40,40);
+//    x->options[0] = new Text(Point(125, 150,0),"Info");
+    
+    //given w and h, select a random position in rect that does not overlap(?) other
+    main_room->all_items.push_back(x);
+
 }
 
 MainScreen::~MainScreen(){
@@ -47,10 +56,10 @@ MainScreen::~MainScreen(){
 }
 
 void MainScreen::render(){
-    main_room->render();
     ph->render();
     mh->render();
     turn_left->render();
+    main_room->render();
     //render health
 }
 
@@ -71,7 +80,7 @@ void MainScreen::make_room(){
     //pick a direction, and find the matching direction with it
     Door * d1 = new Door(Door::get_rand_dir());
     //get position on the part and check against other door (if we have that might intersect it)
-    //so nasty here
+   
     do {
         bool flag = true;
         for (unsigned int i = 0; i < selected_room->doors.size(); i++) {
@@ -80,24 +89,10 @@ void MainScreen::make_room(){
                 break;
             }
         }
-        if (!flag) {
-            d1->rand_pos();
-        }else{
-            break;
-        }
+        if (!flag) d1->rand_pos();
+        else break;
     } while (true);
-//    while (flag) {
-//        flag = true;
-//        for (unsigned int i = 0; i < selected_room->doors.size(); i++) {
-//            if (d1->hitbox.is_rect_overlap(selected_room->doors[i]->hitbox)) {
-//                flag = false;
-//                break;
-//            }
-//        }
-//        if (!flag) {
-//            d1->rand_pos();
-//        }
-//    }
+
     //create the matching door
     Door * d2 = new Door(d1->get_opp_dir());
     Room * new_room = new Room();
@@ -117,8 +112,11 @@ void MainScreen::turn_end(){
     Instance::get().inter_screen->text->set_text("Day ?");
     
     if(player->get_new_condtion() == Player::CREATE_ROOM){
-        
-    }else if(player->get_new_condtion() == Player::DESTROY_ROOM){
+        make_room();
+        //Depends on the condition, we can make special room
+        //and we always know that the newly create room will be the last room
+    }
+    /*else if(player->get_new_condtion() == Player::DESTROY_ROOM){
 #warning NOT TESTED
         unsigned int max_tag = 0;
         unsigned int index = 0;
@@ -139,7 +137,7 @@ void MainScreen::turn_end(){
             }
         }
         delete bad_room;
-    }
+    }*/
 
     //put player back to the root room
     for (unsigned int i =0 ; i < rooms.size(); i++) {
