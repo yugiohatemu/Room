@@ -16,7 +16,7 @@ const int SCREEN_HEIGHT = 480;
 const float t_TEXT_WIDTH = 0.09375;
 const float t_TEXT_HEIGHT = 0.125;
 
-const float TEXT_WIDTH = 30;
+const float TEXT_WIDTH = 24;
 const float TEXT_HEIGHT = 40;
 
 const int ONE_TURN_COST = 24;

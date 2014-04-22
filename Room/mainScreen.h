@@ -26,9 +26,10 @@ public:
     void render();
     void update(SDL_Event event);
     void turn_end();
-    
-    bool show_health;
-    Text * health_screen;
+
+    Text * ph;
+    Text * mh;
+    Text * turn_left;
 };
 
 #endif /* defined(__Room__mainScreen__) */

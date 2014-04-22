@@ -19,13 +19,12 @@
 MainScreen::MainScreen(){
     player = new Player();
     player->hitbox = Rect(Point(),40,120);
-    show_health = false;
+
     //Central memory control of room and door
     Room * root_room = new Room();
     rooms.push_back(root_room);
     main_room = root_room;
     main_room->player = player;
-    health_screen = new Text(Point(320, 200,0), "HP:  \nMP:  \nX:  ");
     
     //Create main room here
     Item *bed = new Item();
@@ -65,6 +64,10 @@ MainScreen::MainScreen(){
     root_room->all_items.push_back(bed);
     root_room->all_items.push_back(X);
     root_room->all_items.push_back(book);
+    
+    ph = new Text(Point(), "PH: 100");
+    mh = new Text(Point(300,0,0), "MH: 100");
+    turn_left = new Text(Point(500,0,0), "TL: 24");
    
 }
 
@@ -73,21 +76,22 @@ MainScreen::~MainScreen(){
         if (rooms[i]) delete rooms[i];
     }
     delete player;
+    delete ph;
+    delete mh;
+    delete turn_left;
 }
 
 void MainScreen::render(){
     main_room->render();
-    if (show_health) {
-        //health_screen->set_text_with_player_stat();
-        health_screen->render();
-    }
+    ph->render();
+    mh->render();
+    turn_left->render();
+    //render health
 }
 
 void MainScreen::update(SDL_Event event){
-    if (event.type == SDL_KEYDOWN){
-        if(event.key.keysym.sym == SDLK_ESCAPE) show_health = !show_health ;
-    }
     main_room->update(event);
+   
 }
 
 void MainScreen::turn_end(){
@@ -154,6 +158,7 @@ void MainScreen::turn_end(){
     main_room = rooms[0];
     main_room->player = player;
     player->turn_left = ONE_TURN_COST;
-    show_health = false;
+    turn_left->set_text("TL: 24");
+    
 }
 

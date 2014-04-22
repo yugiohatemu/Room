@@ -18,7 +18,6 @@ class Texture{
 public:
     enum{
         ITEM,
-        FONT,
         TOTAL_TEXTURE,
     }TEXTURE_TYPE;
     
