@@ -36,6 +36,7 @@ public:
     int get_option_being_hit(Point pos);
     std::string item_name;
     bool lazy;
+    bool hidden;
 //    std::string event;
 };
 

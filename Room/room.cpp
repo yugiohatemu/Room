@@ -33,7 +33,6 @@ Room::Room(){
     std::cout<<"Create Room "<<tag<<std::endl;
     
     player = NULL;
-    // TODO: test create item for special room
 }
 
 void Room::set_item_in_room(ROOM_TYPE r_type){
@@ -87,7 +86,19 @@ void Room::reset(){
         all_items[i]->option_hidden = true;
         all_items[i]->info_hidden = true;
     }
+    
+    //delete hidden stuff
+    std::vector<Item *>::iterator it = all_items.begin();
+    while (it != all_items.end()) {
+        if ((*it)->hidden) {
+            it = all_items.erase(it);
+        }else
+            it++;
+    }
+    
     player = NULL;
+    
+    
 }
 
 void Room::render(){
@@ -163,6 +174,11 @@ void Room::update(SDL_Event event){
                     if (option_hit == 0) { //0
                         all_items[i]->info_hidden = false;
                     }else if(option_hit == 1){ //use or like if option_hit == USE
+                        if (all_items[i]->type == ITEM_LAZY) {
+                            all_items[i]->hidden = true;
+                        }
+                        
+                        
                         player->physical_health += all_items[i]->ph_charge;
                         player->mental_health += all_items[i]->mh_charge;
                         player->turn_left -= all_items[i]->turn_cost;

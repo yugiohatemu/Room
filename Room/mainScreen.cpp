@@ -38,7 +38,8 @@ MainScreen::MainScreen(){
     Item * x = new Item(true);
     x->item_name = "XX";
     x->hitbox = Rect(Point(400,300,0),40,40);
-//    x->options[0] = new Text(Point(125, 150,0),"Info");
+    x->options[0] = new Text(Point(420, 320,0),"Info");
+    x->options[1] = new Text(Point(420, 320 + TEXT_HEIGHT,0),"Pick");
     
     //given w and h, select a random position in rect that does not overlap(?) other
     main_room->all_items.push_back(x);

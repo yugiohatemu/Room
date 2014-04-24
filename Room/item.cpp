@@ -23,6 +23,9 @@ Item::Item(bool lazy):lazy(lazy){
     ph_charge = 0;
     mh_charge = 0;
     turn_cost = 0;
+    
+    hidden = false;
+    if(lazy) type = ITEM_LAZY;
 }
 
 Item::~Item(){
@@ -32,6 +35,7 @@ Item::~Item(){
 }
 
 void Item::render(){
+    if (hidden) return ;
     
     if (lazy) {
         glPushMatrix();
@@ -84,6 +88,7 @@ void Item::render(){
 }
 
 bool Item::is_item_being_hit(Point pos){
+    if(hidden) return false;
     for (unsigned int i = 0; i < 2; i++) {
         if ( options[i]&&options[i]->hitbox.is_pos_in_rec(pos)) return true;
     }
@@ -92,6 +97,7 @@ bool Item::is_item_being_hit(Point pos){
 
 //-1 is hiting on the original
 int Item::get_option_being_hit(Point pos){
+    if (hidden) return  -1;
     for (unsigned int i = 0; i < 2; i++) {
         if (options[i]&&options[i]->hitbox.is_pos_in_rec(pos)) return i;
     }

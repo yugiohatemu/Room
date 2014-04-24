@@ -75,13 +75,15 @@ const float TEXT_CLIP[] = {
 };*/
 
 enum ITEM_TYPE{
-    ITEM_BED = 0,
+   
+    ITEM_BED,
     ITEM_X,
     ITEM_FOOD,
     ITEM_BOOK,
     ITEM_CARPET,
     ITEM_PLAYER,
     ITEM_GHOST,
+    ITEM_LAZY,
 };
 //256/8 = 32
 const float ITEM_CLIP [] ={
