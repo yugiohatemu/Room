@@ -41,6 +41,10 @@ bool Rect::is_rect_overlap(Rect r){
 }
 
 Vector Rect::get_closest_dir(Point pos, Vector dir){
+    
+    if (is_pos_in_rec(pos) && is_pos_in_rec(pos + dir)) {//actually, on the edge...
+        return Vector();
+    }
     //lazy cheat to create cycle
     float t = 1.0f;
     Point points[5];
@@ -49,8 +53,10 @@ Vector Rect::get_closest_dir(Point pos, Vector dir){
     points[2] = points[1]; points[2].y += height;
     points[3] = points[0]; points[3].y += height;
     points[4] = points[0];
-    
+        
+    //else, do a check
     for (unsigned int i = 0; i < 4; i++) { //x * vec.y - y * vec.x
+        
         Vector edge_vec = points[i+1]- points[i];
         float div_down = dir.x * edge_vec.y - dir.y * edge_vec.x;
         

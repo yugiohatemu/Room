@@ -162,32 +162,28 @@ void Room::update(SDL_Event event){
         }
         //we can get a vector here, just to make things easy?
         for (unsigned int i = 0; i < all_items.size(); i++) {
-            if (all_items[i]->is_item_being_hit(new_pos)) {
+            if (all_items[i]->is_item_being_hit(new_pos)&& dir.get_norm() < 20) {//player's width/2?
                 
-                if (!all_items[i]->option_hidden) { //note, here should be option->hidden
+                dir = Vector();
+                if (!all_items[i]->option_hidden) { //option is shown
                     
                     int option_hit = all_items[i]->get_option_being_hit(new_pos);
-                    if (option_hit != -1) { //hit actually happens on option
-//                        std::cout<<"Hit option "<<option_hit<<std::endl;
-                    }
                     
                     if (option_hit == 0) { //0
                         all_items[i]->info_hidden = false;
                     }else if(option_hit == 1){ //use or like if option_hit == USE
-                        if (all_items[i]->type == ITEM_LAZY) {
-                            all_items[i]->hidden = true;
-                        }
                         
+                        if (all_items[i]->type == ITEM_LAZY) all_items[i]->hidden = true;
                         
-                        player->physical_health += all_items[i]->ph_charge;
-                        player->mental_health += all_items[i]->mh_charge;
-                        player->turn_left -= all_items[i]->turn_cost;
-
-                        {   //update text
+                        {   //update player info
+                            player->physical_health += all_items[i]->ph_charge;
+                            player->mental_health += all_items[i]->mh_charge;
+                            player->turn_left -= all_items[i]->turn_cost;
+                            
                             std::stringstream ss; ss<<"PH: "<<player->physical_health;
                             Instance::get().main_screen->ph->set_text(ss.str());
                             ss.str("");
-                        
+                            
                             ss<<"MH: "<<player->mental_health;
                             Instance::get().main_screen->mh->set_text(ss.str());
                             ss.str("");
@@ -198,19 +194,14 @@ void Room::update(SDL_Event event){
                         
                         if (player->turn_left  <= 0 || all_items[i]->type == ITEM_BED) { //reset
                             Instance::get().main_screen->turn_end();
-                            return ;
                         }
-                        
-                    }else if(false){ //option_hit == PICK UP
-                        //TODO:
                     }
                     
-                    dir = Vector();
-                    break;
-                    
-                }else { //close enough
+                }else{
                     all_items[i]->option_hidden = false;
                 }
+                
+                break;
             }else{
                 all_items[i]->option_hidden = true;
                 all_items[i]->info_hidden = true;
